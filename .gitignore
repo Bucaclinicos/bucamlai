@@ -1,0 +1,33 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.egg-info/
+.pytest_cache/
+.env
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Data — no subir datasets con info real de la empresa
+backend/data/dataset_acumulado.csv
+backend/data/RENTA2026-3.csv
+backend/data/RENTA2026-3_LIMPIO.csv
+
+# Modelos ML entrenados (son muy pesados — 250MB+)
+backend/models/*.pkl
+backend/models/prophet/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archivos temporales del proyecto
+PROM.MD
+image.png
+LOGO.svg

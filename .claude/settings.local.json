@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "WebFetch(domain:mui.com)",
+      "WebFetch(domain:demos.themeselection.com)",
+      "WebFetch(domain:demos.creative-tim.com)",
+      "WebFetch(domain:preview.tabler.io)",
+      "Bash(venv\\\\Scripts\\\\python.exe -m pytest tests/ -v --tb=short)",
+      "Bash(\"venv/Scripts/python.exe\" -m pytest tests/ -v --tb=short)",
+      "Bash(\"venv/Scripts/python.exe\" -m pytest tests/test_api.py -k \"test_resumen_total_registros or test_resumen_productos_unicos or test_cargar_formato_invalido or test_pareto_total_productos\" -v --tb=long)",
+      "Bash(\"venv/Scripts/python.exe\" -m pytest tests/ --tb=short -q)",
+      "Bash(git checkout *)",
+      "Bash(git add *)"
+    ]
+  }
+}

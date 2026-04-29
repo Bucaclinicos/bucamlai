@@ -1,0 +1,13 @@
+# Entorno virtual
+venv/
+
+# Modelos entrenados (se regeneran con POST /modelos/reentrenar)
+models/*.pkl
+
+# Variables de entorno
+.env
+
+# Cache de Python
+__pycache__/
+*.pyc
+.pytest_cache/
