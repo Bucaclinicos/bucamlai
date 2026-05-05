@@ -7,7 +7,10 @@ import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import Box from '@mui/material/Box'
 import Tooltip from '@mui/material/Tooltip'
-import { NavLink, useLocation } from 'react-router-dom'
+import IconButton from '@mui/material/IconButton'
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 import DashboardRoundedIcon    from '@mui/icons-material/DashboardRounded'
 import InventoryRoundedIcon    from '@mui/icons-material/InventoryRounded'
@@ -19,7 +22,7 @@ import WbCloudyRoundedIcon     from '@mui/icons-material/WbCloudyRounded'
 import SmartToyRoundedIcon     from '@mui/icons-material/SmartToyRounded'
 import UploadFileRoundedIcon   from '@mui/icons-material/UploadFileRounded'
 
-const NAV = [
+const NAV_BASE = [
   {
     group: 'Análisis',
     items: [
@@ -38,6 +41,9 @@ const NAV = [
       { to: '/chatbot',       Icon: SmartToyRoundedIcon,  label: 'Consultas IA'  },
     ],
   },
+]
+
+const NAV_ADMIN = [
   {
     group: 'Datos',
     items: [
@@ -50,7 +56,16 @@ const W = 240
 
 export default function Sidebar() {
   const { pathname } = useLocation()
+  const navigate = useNavigate()
+  const { user, logout } = useAuth()
   const active = (to) => to === '/' ? pathname === '/' : pathname.startsWith(to)
+
+  const NAV = user?.role === 'admin' ? [...NAV_BASE, ...NAV_ADMIN] : NAV_BASE
+
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
+  }
 
   return (
     <Drawer
@@ -139,16 +154,21 @@ export default function Sidebar() {
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: '0.72rem', fontWeight: 700, color: '#718096',
         }}>
-          B
+          {user?.nombre?.[0]?.toUpperCase() ?? 'U'}
         </Box>
-        <Box sx={{ minWidth: 0 }}>
+        <Box sx={{ minWidth: 0, flex: 1 }}>
           <Typography sx={{ fontSize: '0.775rem', fontWeight: 600, color: '#2D3748', lineHeight: 1.2 }} noWrap>
-            Bucaclínicos S.A.S.
+            {user?.nombre ?? 'Usuario'}
           </Typography>
-          <Typography sx={{ fontSize: '0.65rem', color: '#A0AEC0', mt: 0.2 }}>
-            Bucaramanga · Colombia
+          <Typography sx={{ fontSize: '0.65rem', color: '#A0AEC0', mt: 0.2, textTransform: 'capitalize' }}>
+            {user?.role ?? ''}
           </Typography>
         </Box>
+        <Tooltip title="Cerrar sesión">
+          <IconButton size="small" onClick={handleLogout} sx={{ color: '#A0AEC0', '&:hover': { color: '#C0392B' } }}>
+            <LogoutRoundedIcon fontSize="small" />
+          </IconButton>
+        </Tooltip>
       </Box>
     </Drawer>
   )

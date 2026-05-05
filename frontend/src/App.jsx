@@ -1,5 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext'
+import ProtectedRoute from './components/ProtectedRoute'
 import Layout from './components/Layout'
+import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Prediccion from './pages/Prediccion'
 import Inventario from './pages/Inventario'
@@ -12,20 +15,29 @@ import AlertasClima from './pages/AlertasClima'
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/"           element={<Dashboard />} />
-          <Route path="/prediccion" element={<Prediccion />} />
-          <Route path="/inventario" element={<Inventario />} />
-          <Route path="/pareto"     element={<Pareto />} />
-          <Route path="/chatbot"    element={<Chatbot />} />
-          <Route path="/cargar"     element={<CargarDatos />} />
-          <Route path="/metricas"    element={<Metricas />} />
-          <Route path="/evaluacion"  element={<Evaluacion />} />
-          <Route path="/alertas-clima" element={<AlertasClima />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
+            <Route path="/"               element={<Dashboard />} />
+            <Route path="/prediccion"     element={<Prediccion />} />
+            <Route path="/inventario"     element={<Inventario />} />
+            <Route path="/pareto"         element={<Pareto />} />
+            <Route path="/chatbot"        element={<Chatbot />} />
+            <Route path="/metricas"       element={<Metricas />} />
+            <Route path="/evaluacion"     element={<Evaluacion />} />
+            <Route path="/alertas-clima"  element={<AlertasClima />} />
+            {/* Solo admin puede cargar datos */}
+            <Route path="/cargar" element={
+              <ProtectedRoute roles={['admin']}>
+                <CargarDatos />
+              </ProtectedRoute>
+            } />
+          </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }

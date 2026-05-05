@@ -12,7 +12,14 @@
       "Bash(\"venv/Scripts/python.exe\" -m pytest tests/test_api.py -k \"test_resumen_total_registros or test_resumen_productos_unicos or test_cargar_formato_invalido or test_pareto_total_productos\" -v --tb=long)",
       "Bash(\"venv/Scripts/python.exe\" -m pytest tests/ --tb=short -q)",
       "Bash(git checkout *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git pull *)",
+      "Bash(pip show *)",
+      "Bash(venv/Scripts/pip install *)",
+      "Bash(venv/Scripts/python -c ' *)",
+      "Bash(venv/Scripts/python -c \"from routers.auth import router; print\\('auth router OK'\\)\")"
     ]
   }
 }

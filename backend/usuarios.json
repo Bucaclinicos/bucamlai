@@ -1,0 +1,14 @@
+[
+  {
+    "username": "admin",
+    "password": "$5$rounds=535000$QnYftW9U7KQOgzCs$aV0wzuQTgGM8BosCws5SzjHQIilaVIuSsi1tVhxOgJ1",
+    "role": "admin",
+    "nombre": "Administrador"
+  },
+  {
+    "username": "analista",
+    "password": "$5$rounds=535000$C0mnmyk17SXvo17E$nDhDH5QDbem2L9W0GEIFMp8B21U.3uyoTRuYdzp3f09",
+    "role": "analista",
+    "nombre": "Analista"
+  }
+]
