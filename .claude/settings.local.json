@@ -19,7 +19,17 @@
       "Bash(pip show *)",
       "Bash(venv/Scripts/pip install *)",
       "Bash(venv/Scripts/python -c ' *)",
-      "Bash(venv/Scripts/python -c \"from routers.auth import router; print\\('auth router OK'\\)\")"
+      "Bash(venv/Scripts/python -c \"from routers.auth import router; print\\('auth router OK'\\)\")",
+      "Bash(pip install *)",
+      "Bash(python -c ' *)",
+      "Bash(python -c \"import sqlalchemy; print\\(sqlalchemy.__version__\\)\")",
+      "Bash(python -c \"import sys; print\\(sys.executable\\)\")",
+      "Bash(where python *)",
+      "Bash(where pip *)",
+      "Bash(C:\\\\Users\\\\Lenovo\\\\AppData\\\\Local\\\\Python\\\\bin\\\\python.exe *)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(& \"C:\\\\Users\\\\Lenovo\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313\\\\Scripts\\\\pip.exe\" list 2>&1 | Select-Object -First 30)",
+      "PowerShell(Test-NetConnection *)"
     ]
   }
 }

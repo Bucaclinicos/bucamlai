@@ -21,6 +21,7 @@ import AutoGraphRoundedIcon    from '@mui/icons-material/AutoGraphRounded'
 import WbCloudyRoundedIcon     from '@mui/icons-material/WbCloudyRounded'
 import SmartToyRoundedIcon     from '@mui/icons-material/SmartToyRounded'
 import UploadFileRoundedIcon   from '@mui/icons-material/UploadFileRounded'
+import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded'
 
 const NAV_BASE = [
   {
@@ -45,9 +46,10 @@ const NAV_BASE = [
 
 const NAV_ADMIN = [
   {
-    group: 'Datos',
+    group: 'Administración',
     items: [
-      { to: '/cargar', Icon: UploadFileRoundedIcon, label: 'Cargar Datos' },
+      { to: '/cargar', Icon: UploadFileRoundedIcon,    label: 'Cargar Datos'  },
+      { to: '/admin',  Icon: ManageAccountsRoundedIcon, label: 'Usuarios'      },
     ],
   },
 ]
