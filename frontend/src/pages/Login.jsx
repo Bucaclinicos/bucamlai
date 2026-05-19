@@ -82,6 +82,11 @@ export default function Login() {
             >
               {loading ? <CircularProgress size={20} color="inherit" /> : 'Ingresar'}
             </Button>
+            <Typography variant="body2" sx={{ textAlign: 'center', color: '#718096', mt: 0.5 }}>
+              <a href="/forgot-password" style={{ color: '#C0392B', textDecoration: 'none', fontWeight: 600 }}>
+                ¿Olvidaste tu contraseña?
+              </a>
+            </Typography>
           </Box>
         </CardContent>
       </Card>
