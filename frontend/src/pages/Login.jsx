@@ -11,7 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import axios from 'axios'
 import { useAuth } from '../context/AuthContext'
 
-const api = axios.create({ baseURL: 'http://localhost:8080' })
+const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080' })
 
 export default function Login() {
   const { login } = useAuth()

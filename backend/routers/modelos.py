@@ -1,3 +1,4 @@
+import traceback
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 from typing import Optional
@@ -10,16 +11,21 @@ router = APIRouter()
 
 class SolicitudPrediccion(BaseModel):
     medicamento: str
-    meses: int = Field(default=1, ge=1, le=24)  # mínimo 1, máximo 24 meses
+    meses: int = Field(default=1, ge=1, le=24)
     temporada: str = "normal"
     usar_prophet: bool = True
 
 
 @router.post("/prediccion")
 def prediccion(solicitud: SolicitudPrediccion):
-    if solicitud.usar_prophet:
-        return prophet_predecir(solicitud.medicamento, solicitud.meses)
-    return predecir_demanda(solicitud.medicamento, solicitud.meses, solicitud.temporada)
+    try:
+        if solicitud.usar_prophet:
+            return prophet_predecir(solicitud.medicamento, solicitud.meses)
+        return predecir_demanda(solicitud.medicamento, solicitud.meses, solicitud.temporada)
+    except Exception as e:
+        tb = traceback.format_exc()
+        print(f"[ERROR /prediccion] {e}\n{tb}")
+        raise HTTPException(status_code=500, detail={"error": str(e), "traceback": tb})
 
 
 @router.get("/medicamentos")

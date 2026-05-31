@@ -1,0 +1,753 @@
+DESCRIPCIÓN DE LAS TAREAS DE EVALUACIÓN
+PÁGINA 1
+DE: 9
+F – DC – 170 VERSIÓN: 1.0
+NOMBRE DEL CURSO: SELECCIÓN Y EVALUACIÓN DE TECNOLOGÍA
+Modalidad Presencial X A Distancia Virtual
+Tipo de Curso: Teórico
+Práctico
+Créditos
+Académicos 4 HTD 64 HTI 32 Semestre: VI
+CORTE: III
+COMPETENCIAS ESPECÍFICAS RESULTADOS DE APRENDIZAJE
+Determina la solución tecnológica final, para la
+empresa, acorde a los objetivos y condiciones del
+cliente.
+Seleccionar la tecnología idónea en la
+infraestructura tecnológica de la organización
+teniendo en cuenta los requerimientos funcionales
+del sistema de información.
+Implementar la solución tecnológica elegida por la
+organización y acorde a las condiciones del
+cliente.
+Ejecutar las condiciones finales de negociación de
+la tecnología seleccionada, teniendo en cuenta los
+requerimientos del cliente.
+COMPETENCIAS GENÉRICAS RESULTADOS DE APRENDIZAJE
+PENSAMIENTO CIENTÍFICO
+Resuelve problemas del contexto mediante una
+determinada metodología de investigación para
+generar conocimiento y actuar con mayor impacto
+en la realidad, considerando los pre-saberes, el
+trabajo colaborativo y el compromiso ético.
+Realizar recolección de datos a partir de técnicas
+que faciliten la caracterización de una realidad
+determinada.
+Generar conclusiones que impacten la realidad a
+partir de la comprobación o refutación de
+hipótesis.
+PENSAMIENTO CRÍTICO Y RESOLUCIÓN DE
+PROBLEMAS
+Reflexiona sobre las consecuencias y efectos de
+las decisiones, conclusiones e interpretaciones con
+el fin de argumentar su análisis con base en
+criterios de autonomía y compromiso intelectual.
+Planificar la resolución de un problema a partir del
+análisis de la mejor opción de solución.
+Construir opciones para resolver un problema a
+partir de los objetivos planteados.
+Proponer soluciones en atención a la problemática
+considerando los recursos, el talento humano, el
+tiempo y la complejidad de la opción.
+TAREAS DE EVALUACIÓN
+Informe Final Integrador: Selección, Implementación y Negociación Tecnológica
+DESCRIPCIÓN DE LAS SUBTAREAS DE EVALUACIÓN
+Criterios de
+evaluación
+Instrumentos de
+evaluación
+ELABORADO POR:
+Proceso de Docencia
+Oficina Desarrollo Académico
+REVISADO POR: Soporte al Sistema
+Integrado de Gestión SIG
+APROBADO POR: Representante de la Dirección
+FECHA DE APROBACIÓN: Marzo de 2021
+DOCENCIA
+DESCRIPCIÓN DE LAS TAREAS DE EVALUACIÓN
+PÁGINA 2
+DE: 9
+F – DC – 170 VERSIÓN: 1.0
+Productos/actuaciones
+de aprendizaje de la
+subtarea
+Descripción de la
+subtarea/s de
+evaluación
+Informe final integrador,
+que consolida los
+resultados de las fases
+previas del proyecto:
+selección,
+implementación y
+negociación tecnológica.
+El producto integra el
+encaje Propuesta de
+Valor–Segmento de
+Mercado, la Matriz
+Ponderada de Selección
+Tecnológica, el
+Cronograma o Diagrama
+de Gantt y el Acta de
+Negociación Cliente–
+Proveedor.
+Título: Informe Final
+Integrador: Selección,
+Implementación y
+Negociación
+Tecnológica
+Pertinencia del
+análisis y encaje
+valor–mercado
+Aplicación de criterios
+de selección
+tecnológica (Buy vs.
+Make)
+Viabilidad y
+coherencia del
+cronograma de
+implementación
+Negociación
+tecnológica y solución
+de conflictos
+Acta de negociación y
+cierre de acuerdos
+Claridad, coherencia
+y reflexión crítica del
+documento final
+Rúbrica
+Descripción de la
+actividad:
+La actividad consiste
+en la elaboración de un
+informe integrador
+final, que articule los
+productos
+desarrollados durante
+el II y III corte
+académico y el
+proyecto final. El
+informe debe integrar
+los siguientes temas:
+Contexto del negocio
+y problema
+organizacional:
+Descripción de la
+empresa o
+emprendimiento: a qué
+se dedica, su sector,
+tamaño y estructura
+básica. Se identifica el
+problema o necesidad
+tecnológica que
+justifica el proyecto. Es
+el “por qué” del
+informe.
+Encaje entre
+propuesta de valor y
+segmento de
+mercado: Análisis del
+modelo Canvas
+enfocado en dos
+bloques clave: qué
+valor ofrece la solución
+tecnológica al negocio
+(propuesta de valor) y
+ELABORADO POR:
+Proceso de Docencia
+Oficina Desarrollo Académico
+REVISADO POR: Soporte al Sistema
+Integrado de Gestión SIG
+APROBADO POR: Representante de la Dirección
+FECHA DE APROBACIÓN: Marzo de 2021
+DOCENCIA
+DESCRIPCIÓN DE LAS TAREAS DE EVALUACIÓN
+PÁGINA 3
+DE: 9
+F – DC – 170 VERSIÓN: 1.0
+a quién va dirigida
+(segmento de
+clientes). Se verifica
+que haya coherencia
+entre ambos.
+Selección de la
+solución
+tecnológica:
+Presentación de las
+dos estrategias de
+adquisición
+tecnológica evaluadas:
+la estrategia Buy
+(solución desarrollada
+externamente, que es
+la propuesta
+entregada por el
+equipo) y la estrategia
+Make (solución
+desarrollada
+internamente por la
+empresa), con sus
+características,
+ventajas, desventajas
+y la justificación de
+cuál fue seleccionada.
+Matriz ponderada y
+toma de decisiones:
+Herramienta
+cuantitativa donde se
+definen criterios de
+evaluación (costo,
+tiempo de desarrollo,
+escalabilidad, control,
+soporte, etc.), se les
+asigna un peso
+porcentual y se
+califican las dos
+estrategias: Buy vs.
+Make. La de mayor
+puntaje sustenta la
+decisión final de
+adquirir la solución
+externa.
+ELABORADO POR:
+Proceso de Docencia
+Oficina Desarrollo Académico
+REVISADO POR: Soporte al Sistema
+Integrado de Gestión SIG
+APROBADO POR: Representante de la Dirección
+FECHA DE APROBACIÓN: Marzo de 2021
+DOCENCIA
+DESCRIPCIÓN DE LAS TAREAS DE EVALUACIÓN
+PÁGINA 4
+DE: 9
+F – DC – 170 VERSIÓN: 1.0
+Plan de
+implementación
+tecnológica:
+Descripción detallada
+de cómo se va a poner
+en marcha la solución:
+fases del proyecto,
+actividades por fase,
+recursos humanos,
+técnicos y financieros
+necesarios, y
+responsables de cada
+tarea.
+Cronograma o
+diagrama de Gantt:
+Representación visual
+del plan de
+implementación en el
+tiempo: qué actividad
+se hace, en qué
+semana o mes, cuánto
+dura y cómo se
+relaciona con las
+demás. Permite
+visualizar el avance
+esperado del proyecto.
+Monitoreo y control
+del proyecto:
+Definición de
+indicadores o métricas
+(KPIs) para hacer
+seguimiento al avance
+del proyecto: qué se va
+a medir, con qué
+frecuencia, quién lo
+revisa y qué acciones
+correctivas se toman si
+hay desviaciones.
+Negociación
+tecnológica y
+solución de
+conflictos:
+Descripción de las
+estrategias de
+negociación utilizadas
+ELABORADO POR:
+Proceso de Docencia
+Oficina Desarrollo Académico
+REVISADO POR: Soporte al Sistema
+Integrado de Gestión SIG
+APROBADO POR: Representante de la Dirección
+FECHA DE APROBACIÓN: Marzo de 2021
+DOCENCIA
+DESCRIPCIÓN DE LAS TAREAS DE EVALUACIÓN
+PÁGINA 5
+DE: 9
+F – DC – 170 VERSIÓN: 1.0
+con el proveedor
+tecnológico: qué
+técnica se aplicó
+(ganar-ganar, BATNA,
+etc.), qué puntos se
+negociaron (precio,
+soporte, tiempos de
+entrega) y cómo se
+manejaron los
+desacuerdos surgidos.
+Acta de negociación
+y cierre de acuerdos:
+Documento formal que
+registra los
+compromisos
+pactados entre el
+cliente (la empresa) y
+el proveedor:
+condiciones
+acordadas,
+responsabilidades de
+cada parte, fechas
+clave, garantías y
+firmas. Es la evidencia
+del cierre del proceso.
+Conclusiones
+estratégicas del
+proyecto: Reflexión
+crítica final sobre todo
+el proceso: qué
+aprendizajes dejó, si la
+solución elegida
+responde realmente al
+problema, qué riesgos
+quedan pendientes y
+qué recomendaciones
+estratégicas se hacen
+para la etapa de
+ejecución real.
+Descripción de la
+participación en la
+evaluación:
+Heteroevaluación
+ELABORADO POR:
+Proceso de Docencia
+Oficina Desarrollo Académico
+REVISADO POR: Soporte al Sistema
+Integrado de Gestión SIG
+APROBADO POR: Representante de la Dirección
+FECHA DE APROBACIÓN: Marzo de 2021
+DOCENCIA
+DESCRIPCIÓN DE LAS TAREAS DE EVALUACIÓN
+PÁGINA 6
+DE: 9
+F – DC – 170 VERSIÓN: 1.0
+Carácter de la tarea:
+Trabajo grupal:
+Aplicativo e
+integrador. Requiere
+análisis,
+argumentación y
+redacción técnica, con
+enfoque colaborativo y
+ético.
+Recursos
+necesarios:
+Computador con
+acceso a internet y
+herramientas
+ofimáticas (Word,
+Excel o Google
+Sheets).
+Aplicación Trello o
+Asana.
+Documentos de
+actividades previas.
+Rúbrica institucional
+de evaluación.
+Conexión a la
+plataforma ATENA
+para la entrega final.
+Tiempo estimado de
+trabajo:
+10 horas
+Fecha de entrega:
+31 de mayo de 2026
+Peso de la Actividad:
+30 %
+ESTRUCTURA DEL ACTA DE NEGOCIACIÓN Y CIERRE DE ACUERDOS CLIENTE–
+PROVEEDOR
+El Acta de Negociación debe ser un documento que registra de manera formal los acuerdos
+alcanzados entre el cliente (en este caso, representado por el negocio, emprendimiento o
+empresa) y el proveedor (en este caso, el proveedor es representado por el grupo de
+ELABORADO POR:
+Proceso de Docencia
+Oficina Desarrollo Académico
+REVISADO POR: Soporte al Sistema
+Integrado de Gestión SIG
+APROBADO POR: Representante de la Dirección
+FECHA DE APROBACIÓN: Marzo de 2021
+DOCENCIA
+DESCRIPCIÓN DE LAS TAREAS DE EVALUACIÓN
+PÁGINA 7
+DE: 9
+F – DC – 170 VERSIÓN: 1.0
+estudiantes). Aquí se plasman los términos finales, compromisos de ambas partes y
+condiciones clave del acuerdo.
+Encabezado
+• Nombre del proyecto
+• Partes involucradas
+• Fecha y lugar de la negociación
+Introducción
+Una breve introducción que indique el propósito de la negociación y los términos de la
+negociación.
+Condiciones del Acuerdo
+En este apartado se deben detallar las condiciones claves que ambas partes han acordado
+durante la negociación:
+1. Solución tecnológica seleccionada:
+o Descripción breve del software o servicio adquirido.
+o Características clave que se incluirán en el acuerdo.
+o Exclusiones (por ejemplo, módulos adicionales o servicios no incluidos).
+2. Precio y condiciones de pago:
+o Precio unitario de la tecnología o servicio.
+o Descuentos por volumen o condiciones especiales.
+o Forma de pago: ¿anticipo, pagos fraccionados, pago único?
+o Condiciones de pago: fechas, plazos, métodos.
+3. Plazos de implementación:
+o Fechas de inicio y finalización del proyecto.
+o Hitos clave en el proceso de implementación (ej., instalación, pruebas,
+capacitación, go-live).
+o Fechas límite para cumplimiento de cada hito.
+4. Soporte y mantenimiento:
+o Plazos de soporte tras la implementación.
+o Canales de soporte (email, teléfono, en sitio).
+o Costos adicionales por soporte extra.
+5. Garantías:
+o Duración de la garantía.
+o Cobertura de la garantía (defectos de software, actualizaciones, etc.).
+o Condiciones para hacer válida la garantía (tiempo de respuesta, reemplazos).
+Compromisos de ambas partes
+Esta sección debe reflejar los compromisos adquiridos por cada parte. Aquí se identifican
+los responsables y las acciones a tomar:
+1. Compromisos del proveedor
+2. Compromisos del cliente
+Firmas de ambas partes
+Para darle validez al documento, se deben incluir las firmas de los representantes de ambas
+partes al cierre del acuerdo
+ELABORADO POR:
+Proceso de Docencia
+Oficina Desarrollo Académico
+REVISADO POR: Soporte al Sistema
+Integrado de Gestión SIG
+APROBADO POR: Representante de la Dirección
+FECHA DE APROBACIÓN: Marzo de 2021
+DOCENCIA
+DESCRIPCIÓN DE LAS TAREAS DE EVALUACIÓN
+PÁGINA 8
+DE: 9
+F – DC – 170 VERSIÓN: 1.0
+Anexos
+• Listados de funcionalidades del software o detalles técnicos importantes. (Si es
+necesario)
+Aplicación de Normas APA V.7
+• Portada
+• Objetivo Principal
+• Objetivos Específicos (Relacionados con las actividades que se plantearon en el
+Diagrama de Gantt)
+• Informe Final
+RÚBRICA DE EVALUACIÓN
+Criterios de
+evaluación
+Indicadores
+de evaluación
+Niveles de Dominio
+Excelente
+4.5 – 5.0
+Alto
+4.0 – 4.4
+Medio
+3.0 – 3.9
+Bajo
+0.0 – 2.9
+Pertinencia del
+análisis y
+encaje valor–
+mercado
+Identifica el
+problema
+organizacional
+y demuestra
+coherencia
+entre propuesta
+de valor y
+segmento de
+mercado.
+Análisis
+profundo,
+contexto claro
+y encaje
+completamente
+justificado.
+Buen análisis
+con leves
+inconsistencias
+en el encaje.
+Contexto
+superficial o
+encaje poco
+coherente.
+No identifica el
+problema ni
+presenta
+encaje.
+Aplicación de
+criterios de
+selección
+tecnológica
+(Buy vs. Make)
+Compara
+estrategias Buy
+vs. Make
+mediante
+matriz
+ponderada y
+argumenta la
+decisión.
+Matriz
+completa,
+criterios bien
+ponderados y
+decisión
+sólidamente
+argumentada.
+Matriz
+adecuada con
+leves errores
+en ponderación
+o
+argumentación.
+Matriz
+incompleta o
+comparación
+superficial
+entre
+estrategias.
+No presenta
+matriz ni
+argumenta la
+selección.
+Viabilidad y
+coherencia del
+cronograma de
+implementación
+Presenta plan
+de
+implementación
+con fases,
+responsables,
+recursos y
+diagrama de
+Gantt
+coherente.
+Plan completo,
+Gantt realista y
+con
+indicadores de
+monitoreo
+definidos.
+Cronograma
+adecuado con
+leves vacíos en
+fases o
+recursos.
+Planificación
+parcial o
+Gantt
+incompleto.
+No presenta
+cronograma ni
+plan de
+implementación.
+Negociación
+tecnológica y
+solución de
+conflictos
+Expone las
+técnicas de
+negociación
+aplicadas
+(ganar–ganar,
+BATNA, etc.) y
+Aplica técnica
+claramente
+identificada,
+argumenta
+cada punto
+negociado y
+Identifica la
+técnica y
+describe la
+negociación
+con leves
+vacios en el
+Negociación
+básica sin
+técnica clara
+ni manejo
+explícito de
+conflictos.
+No aplica
+ninguna técnica
+de negociación
+ni aborda
+conflictos.
+ELABORADO POR:
+Proceso de Docencia
+Oficina Desarrollo Académico
+REVISADO POR: Soporte al Sistema
+Integrado de Gestión SIG
+APROBADO POR: Representante de la Dirección
+FECHA DE APROBACIÓN: Marzo de 2021
+DOCENCIA
+DESCRIPCIÓN DE LAS TAREAS DE EVALUACIÓN
+PÁGINA 9
+DE: 9
+F – DC – 170 VERSIÓN: 1.0
+cómo se
+manejaron los
+conflictos con
+el proveedor.
+resuelve
+conflictos de
+forma
+estratégica.
+manejo de
+conflictos.
+Acta de
+negociación y
+cierre de
+acuerdos
+Presenta el
+acta formal con
+encabezado,
+condiciones,
+compromisos
+de ambas
+partes,
+garantías y
+firmas.
+Acta completa,
+bien
+estructurada,
+con todas las
+secciones,
+compromisos
+claros y firmas
+de ambas
+partes.
+Acta con la
+mayoría de las
+secciones
+presentes,
+pero con
+algunas
+condiciones o
+compromisos
+incompletos.
+Acta
+incompleta,
+con pocas
+secciones
+desarrolladas
+y sin firmas o
+compromisos
+definidos.
+No presenta
+acta de
+negociación.
+Claridad,
+coherencia y
+reflexión crítica
+del documento
+final
+Evalúa la
+redacción,
+estructura, uso
+de normas APA
+y profundidad
+de las
+conclusiones.
+Documento
+muy bien
+redactado,
+estructura
+impecable,
+APA correcta y
+conclusiones
+estratégicas
+profundas.
+Buena
+redacción y
+estructura con
+leves fallas en
+APA o
+conclusiones.
+Redacción
+aceptable,
+pero
+conclusiones
+superficiales
+o estructura
+inconsistente.
+Documento
+desorganizado,
+sin
+conclusiones o 
+
+criterios
+Criterios de calificación	
+Pertinencia del análisis y encaje valor–mercado	
+Análisis profundo, contexto claro y encaje completamente justificado.
+5puntos
+Buen análisis con leves inconsistencias en el encaje.
+4.4puntos
+Contexto superficial o encaje poco coherente.
+3.9puntos
+No identifica el problema ni presenta encaje.
+2.9puntos
+Aplicación de criterios de selección tecnológica (Buy vs. Make)	
+Matriz completa, criterios bien ponderados y decisión sólidamente argumentada.
+5puntos
+Matriz adecuada con leves errores en ponderación o argumentación.
+4.4puntos
+Matriz incompleta o comparación superficial entre estrategias.
+3.9puntos
+No presenta matriz ni argumenta la selección.
+2.9puntos
+Viabilidad y coherencia del cronograma de implementación	
+Plan completo, Gantt realista y con indicadores de monitoreo definidos.
+5puntos
+Cronograma adecuado con leves vacíos en fases o recursos.
+4.4puntos
+Planificación parcial o Gantt incompleto.
+3.9puntos
+No presenta cronograma ni plan de implementación.
+2.9puntos
+Negociación tecnológica y solución de conflictos	
+Negociación tecnológica y solución de conflictos
+5puntos
+Identifica la técnica y describe la negociación con leves vacios en el manejo de conflictos.
+4.4puntos
+Negociación básica sin técnica clara ni manejo explícito de conflictos.
+3.9puntos
+No aplica ninguna técnica de negociación ni aborda conflictos.
+2.9puntos
+Acta de negociación y cierre de acuerdos	
+Acta completa, bien estructurada, con todas las secciones, compromisos claros y firmas de ambas partes.
+5puntos
+Acta con la mayoría de las secciones presentes, pero con algunas condiciones o compromisos incompletos.
+4.4puntos
+Acta incompleta, con pocas secciones desarrolladas y sin firmas o compromisos definidos.
+3.9puntos
+No presenta acta de negociación.
+2.9puntos
+Claridad, coherencia y reflexión crítica del documento final	
+Documento muy bien redactado, estructura impecable, APA correcta y conclusiones estratégicas profundas.
+5puntos
+Buena redacción y estructura con leves fallas en APA o conclusiones.
+4.4puntos
+Redacción aceptable, pero conclusiones superficiales o estructura inconsistente.
+3.9puntos
+Documento desorganizado, sin conclusiones o sin normas APA.
+2.9puntos

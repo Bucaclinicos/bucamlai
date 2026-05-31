@@ -1,0 +1,442 @@
+================================================================================
+  INFORME DE SELECCIÓN Y EVALUACIÓN DE TECNOLOGÍA
+  Diseño y análisis de estrategias de adquisición tecnológica
+  Subtarea: Planificación de criterios de adquisición y toma de decisiones
+
+  Integrantes:
+    Iván Andrés Vargas Hernández
+    Javier Steven Becerra Mantilla
+    Angel Santiago Jaimes Moreno
+    Yeison Stiven Segura Rincon
+    Jhon Fredi Martínez Diaz
+
+  Asignatura: Selección y Evaluación de Tecnología
+  Semestre: VI
+  Docente: Alexander Anchicoque
+  Institución: Unidades Tecnológicas de Santander
+  Fecha: Abril 2026
+================================================================================
+
+
+========================================================================
+  SECCIÓN 1 – CONTEXTO DEL CASO DE ESTUDIO
+========================================================================
+
+Bucaclínicos S.A.S. es una farmacia ubicada en la carrera 22 #54-50 de
+Bucaramanga, Santander (NIT: 901.157.386-0). Actualmente la empresa gestiona
+su inventario de medicamentos de manera empirica, es decir, sin ningun sistema
+tecnologico que le permita anticipar la demanda, detectar productos proximos
+a vencerse o identificar patrones de compra entre sus clientes.
+
+Esta situacion genera dos problemas críticos que afectan directamente la
+rentabilidad del negocio:
+
+  a) Exceso de stock en medicamentos de baja rotacion: productos que llegan
+     a su fecha de vencimiento en bodega sin haberse vendido, representando
+     perdidas economicas que segun el analisis del catalogo pueden alcanzar
+     entre el 5% y 10% del inventario activo.
+
+  b) Desabastecimiento en temporadas de alta demanda: durante los periodos de
+     lluvias en Bucaramanga (marzo-mayo y septiembre-noviembre) se incrementa
+     significativamente la demanda de antibioticos, antihistaminicos y
+     antiparasitarios por enfermedades como el dengue, las IRAS y la
+     parasitosis. La farmacia no a podido anticipar esos picos y pierde ventas
+     en los momentos que mas se necesitan los medicamentos.
+
+La necesidad tecnologica concreta consiste en adquirir e implementar un sistema
+de informacion basado en Inteligencia Artificial (IA) que integre modelos de
+Machine Learning para predecir la demanda mensual, clasificar el catalogo por
+nivel de rotacion mediante analisis ABC, generar alertas de reabastecimiento
+con al menos 72 horas de anticipacion e identificar patrones de compra conjunta
+entre productos.
+
+Este caso esta vinculado directamente con las materias de Desarrollo de
+Aplicaciones Empresariales y Nuevas Tecnologías del semestre VI, donde el equipo
+ha desarrollado los artefactos de ingenieria de software (SRS bajo IEEE 830,
+CRISP-DM fases 1 y 2, historias de usuario, mockups en Balsamiq y un prototipo
+funcional en HTML/CSS/JS) que soportan la propuesta de adquisicion tecnologica
+descrita en este informe.
+
+
+========================================================================
+  SECCIÓN 2 – CRITERIOS DE ADQUISICIÓN
+========================================================================
+
+Para seleccionar la tecnología adecuada para Bucaclínicos se definieron los
+siguientes cinco criterios especificos y medibles, derivados del analisis del
+contexto organizacional y de los conceptos de TCO, Make vs. Buy, SLA y ciclo
+de vida tecnologico vistos en clase:
+
+------------------------------------------------------------------------
+CRITERIO 1 – COSTO TOTAL DE PROPIEDAD (TCO) A 5 AÑOS
+------------------------------------------------------------------------
+Descripción:
+  No se evalua unicamente el precio de adquisicion inicial del software o
+  hardware. Se calcula el costo total proyectado a 5 años incluyendo:
+  licencias, mantenimiento, actualizaciones, capacitacion del personal,
+  soporte tecnico y costo estimado por tiempo de inactividad (downtime).
+
+Parametro medible:
+  TCO maximo aceptable = $18.000.000 COP en 5 años.
+  Distribucion esperada: maximo 25% en adquisicion inicial y 75% en
+  operación y mantenimiento.
+
+Justificacion metodologica:
+  Segun el analisis del iceberg financiero visto en clase, tecnologia que
+  parece economica en la inversion inicial frecuentemente resulta mas cara
+  en el largo plazo. En el escenario comparativo analizado, la "opcion barata"
+  genero un sobrecosto de $110.000 USD al año 5. Para Bucaclínicos, dado que
+  es una microempresa con flujo de caja ajustado, escoger una tecnologia sin
+  analizar el TCO completo puede comprometer la sostenibilidad del negocio.
+
+------------------------------------------------------------------------
+CRITERIO 2 – DISPONIBILIDAD Y NIVEL DE SERVICIO (SLA)
+------------------------------------------------------------------------
+Descripción:
+  El sistema debe garantizar un nivel minimo de disponibilidad para no
+  interrumpir la atencion al cliente en horario comercial (lunes a sabado,
+  8:00 a.m. – 8:00 p.m.). Se exige un SLA documentado al proveedor o
+  plataforma de nube seleccionada.
+
+Parametro medible:
+  Disponibilidad minima aceptable: 98% anual.
+  Tiempo maximo de inactividad tolerable: no mas de 175 horas al año.
+  Tiempo de respuesta ante incidentes criticos: menos de 4 horas.
+
+Justificacion metodologica:
+  En clase se reviso la tabla de niveles de disponibilidad y su impacto real.
+  Un SLA del 99% parece alto pero implica casi 88 horas de inactividad anual,
+  mientras que 98% puede representar hasta 175 horas. Para Bucaclínicos, cada
+  hora sin sistema equivale a atencion manual sin registro, lo que aumenta el
+  riesgo de errores en el inventario. El SLA del proveedor debe estar
+  estipulado contractualmente con penalizaciones claras en caso de
+  incumplimiento.
+
+------------------------------------------------------------------------
+CRITERIO 3 – DECISIÓN ESTRATÉGICA MAKE VS. BUY
+------------------------------------------------------------------------
+Descripción:
+  Se evalua si conviene mas desarrollar el sistema internamente (Make) o
+  adquirir una solución comercial ya disponible en el mercado (Buy).
+  Para esto se utiliza la Matriz Make vs. Buy analizando: presupuesto,
+  urgencia, criticidad del sistema y capacidades tecnicas del equipo.
+
+Parametro medible:
+  Se aplicara la matriz de decision con puntuacion ponderada (1-5) en
+  cuatro criterios: costo de desarrollo vs. licencia, tiempo de
+  implementacion, personalizacion requerida, y soporte post-implantacion.
+  El umbral para optar por Make es >= 16 puntos sobre 20.
+
+Justificacion metodologica:
+  El Playbook Estrategico de Adquisicion visto en clase establece que la
+  decision Make es favorable cuando se requiere control total, ventaja
+  competitiva diferencial y hay tiempo suficiente para desarrollar.
+  En el caso de Bucaclínicos, el sistema de prediccion de demanda con ML
+  no esta disponible en soluciones comerciales estandar para farmacias
+  de este tamaño en Colombia, lo cual inclina la decision hacia Make. Sin
+  embargo, componentes operativos como la base de datos y la nube se
+  adquieren como servicios (Buy) para reducir carga operacional.
+
+------------------------------------------------------------------------
+CRITERIO 4 – SEGURIDAD, CUMPLIMIENTO NORMATIVO Y PROTECCION DE DATOS
+------------------------------------------------------------------------
+Descripción:
+  El sistema debe cumplir con los tres pilares de seguridad definidos bajo
+  el estandar ISO 27001: confidencialidad, integridad y disponibilidad de
+  los datos. Adicionalmente debe garantizar cumplimiento con la Ley 1581
+  de 2012 (habeas data Colombia) ya que el sistema maneja datos de
+  proveedores, transacciones y, potencialmente, informacion de clientes
+  frecuentes.
+
+Parametro medible:
+  - Cifrado TLS 1.2+ obligatorio en todas las comunicaciones.
+  - Autenticacion con JWT y bloqueo automatico tras 5 intentos fallidos.
+  - Backups automaticos diarios con retencion minima de 30 dias.
+  - Anonimizacion de datos antes de enviarlos a APIs externas (Gemini API).
+  - Tiempo de recuperacion ante incidentes (RTO): maximo 24 horas.
+
+Justificacion metodologica:
+  Tal como se reviso en la diapositiva sobre ciclo de vida y seguridad, los
+  sistemas sin actualizaciones periodicas entran en una "cronologia del
+  deterioro" donde en el año 3-4 pierden soporte del proveedor y en el año
+  5+ quedan expuestos a vulnerabilidades criticas. El caso WannaCry (2017) es
+  un ejemplo historico de lo que ocurre cuando sistemas de salud usan software
+  obsoleto. Bucaclínicos debe garantizar desde el inicio un ciclo de vida
+  planificado con presupuesto para actualizaciones antes de que el sistema
+  se convierta en una amenaza.
+
+------------------------------------------------------------------------
+CRITERIO 5 – ESCALABILIDAD Y GESTION DE OBSOLESCENCIA
+------------------------------------------------------------------------
+Descripción:
+  La solucion tecnologica debe ser escalable para incorporar nuevas
+  sucursales en el futuro y para integrarse con APIs externas (como alertas
+  epidemiologicas del Ministerio de Salud) sin requerir un rediseño completo
+  de la arquitectura. Ademas, se debe planificar desde el inicio el ciclo
+  de vida del sistema con un presupuesto asignado para renovacion antes del
+  año 5.
+
+Parametro medible:
+  - Arquitectura basada en microservicios o API REST que permita añadir
+    modulos sin afectar el nucleo del sistema.
+  - Plan de obsolescencia documentado con fechas de revision en el año 2,
+    evaluacion de renovacion en el año 3 y presupuesto garantizado para
+    reemplazo antes del año 5.
+  - Uso de servicios en nube (AWS EC2, Clever Cloud) para transferir el
+    riesgo de obsolescencia de hardware al proveedor.
+
+Justificacion metodologica:
+  Segun los tres pilares del Playbook y el ciclo de vida tecnologico analizado
+  en clase, la nube permite trasladar el riesgo de obsolescencia al proveedor
+  mediante actualizaciones automaticas y SLA garantizados. Para Bucaclínicos,
+  desplegar en AWS EC2 con base de datos gestionada en Clever Cloud elimina la
+  necesidad de administrar servidores fisicos y garantiza que la infraestructura
+  no quede desactualizada en los proximos 5 años.
+
+
+========================================================================
+  SECCIÓN 3 – PLANIFICACIÓN INICIAL DEL PROCESO
+========================================================================
+
+A continuacion se presenta la planificacion de las fases del proceso de
+adquisicion tecnologica para el proyecto BucaMLAI, siguiendo el ciclo de
+adquisicion estudiado en clase: analisis de necesidades → estudio de mercado
+→ RFP → negociacion → implementacion.
+
+------------------------------------------------------------------------
+FASE 1 – ANALISIS DE NECESIDADES Y DEFINICION DE REQUERIMIENTOS
+------------------------------------------------------------------------
+Duracion: 3 semanas (semana 1 a semana 3)
+Responsable principal: Iván Vargas (lider del proyecto)
+Apoyo: Todo el equipo
+
+Actividades:
+  1.1 Levantamiento de requerimientos funcionales y no funcionales mediante
+      entrevistas con la administracion de Bucaclínicos y revision del
+      historial de ventas. Artefacto: SRS bajo norma IEEE 830-1998.
+  1.2 Analisis exploratorio de datos (EDA) con Python/Pandas para identificar
+      patrones de demanda estacional, clasificacion ABC y rangos de
+      rentabilidad del catalogo.
+  1.3 Definicion de los cinco criterios de adquisicion descritos en la
+      seccion anterior y ponderacion de su peso en la decision final.
+  1.4 Elaboracion del documento de vision del producto (RUP Vision Document)
+      y las historias de usuario prioritarias.
+
+Entregable: Documento SRS completo + informe CRISP-DM fases 1 y 2.
+
+------------------------------------------------------------------------
+FASE 2 – ESTUDIO DE MERCADO Y EVALUACION DE ALTERNATIVAS
+------------------------------------------------------------------------
+Duracion: 2 semanas (semana 4 a semana 5)
+Responsable principal: Angel Jaimes y Javier Becerra
+Apoyo: Iván Vargas
+
+Actividades:
+  2.1 Mapeo de proveedores y soluciones disponibles en el mercado para
+      farmacias de tamaño pequeño/mediano en Colombia (software ERP
+      farmaceutico, soluciones SaaS, plataformas ML comerciales).
+  2.2 Analisis comparativo de funcionalidades, costos de licencia, SLA
+      documentado y referencias de otros clientes para al menos tres
+      alternativas identificadas.
+  2.3 Aplicacion de la Matriz Make vs. Buy para determinar que componentes
+      se desarrollan internamente (modelos ML, API REST) y cuales se
+      adquieren como servicio (nube, base de datos gestionada).
+  2.4 Calculo del TCO proyectado a 5 años para cada alternativa identificada,
+      incluyendo costos ocultos: capacitacion, migracion, mantenimiento
+      y costo estimado de downtime.
+
+Entregable: Informe comparativo de alternativas con TCO calculado y
+            recomendacion justificada de la opcion seleccionada.
+
+------------------------------------------------------------------------
+FASE 3 – SOLICITUD DE PROPUESTAS (RFP) Y SELECCION FINAL
+------------------------------------------------------------------------
+Duracion: 1 semana (semana 6)
+Responsable principal: Yeison Segura
+Apoyo: Jhon Fredi Martínez
+
+Actividades:
+  3.1 Redaccion de la Solicitud de Propuestas (RFP) formal dirigida a
+      los proveedores de servicios en nube preseleccionados (AWS, Google
+      Cloud, Clever Cloud), detallando requerimientos tecnicos, SLA
+      esperado y plazos de respuesta.
+  3.2 Recepcion y evaluacion de propuestas recibidas segun los cinco
+      criterios de adquisicion definidos (TCO, SLA, Make vs. Buy,
+      seguridad, escalabilidad).
+  3.3 Seleccion definitiva del stack tecnologico y proveedor de
+      infraestructura. Decision documentada con justificacion tecnica
+      y estrategica.
+
+Entregable: RFP emitida + acta de seleccion del proveedor con
+            justificacion de la decision.
+
+------------------------------------------------------------------------
+FASE 4 – NEGOCIACION Y CONTRATO
+------------------------------------------------------------------------
+Duracion: 1 semana (semana 7)
+Responsable principal: Iván Vargas
+Apoyo: Docente / Tutor del proyecto
+
+Actividades:
+  4.1 Negociacion de terminos contractuales con el proveedor seleccionado:
+      hitos de pago, penalizaciones por incumplimiento de SLA, clausulas
+      de escalabilidad y condiciones de salida del contrato.
+  4.2 Definicion formal de los Acuerdos de Nivel de Servicio (SLAs) con
+      metricas verificables: disponibilidad del 98%, tiempo de respuesta
+      ante incidentes menor a 4 horas, backups diarios garantizados.
+  4.3 Revision legal de clausulas de proteccion de datos (Ley 1581 de 2012)
+      y condiciones de propiedad intelectual sobre los modelos ML
+      desarrollados internamente.
+
+Entregable: Contrato firmado con SLAs formalizados.
+
+------------------------------------------------------------------------
+FASE 5 – IMPLEMENTACION Y TRANSICION
+------------------------------------------------------------------------
+Duracion: 8 semanas (semana 8 a semana 15)
+Responsable principal: Todo el equipo
+  Iván Vargas → Backend (FastAPI + PostgreSQL + modelos ML)
+  Yeison Segura → Frontend e interfaz (HTML/CSS/JS)
+  Jhon Fredi Martínez → Ciencia de datos y entrenamiento de modelos
+
+Actividades:
+  5.1 Configuracion del entorno de produccion en AWS EC2 con Nginx como
+      reverse proxy y certificado TLS 1.2+ habilitado.
+  5.2 Migracion e integracion del historial de ventas de Bucaclínicos a
+      la base de datos PostgreSQL en Clever Cloud.
+  5.3 Entrenamiento y validacion de los modelos ML: Random Forest Regressor
+      para prediccion de demanda, KMeans para clustering de productos y
+      Apriori/FP-Growth para analisis de canasta de compra.
+  5.4 Capacitacion del personal administrativo de Bucaclínicos en el uso
+      del dashboard, interpretacion de alertas y generacion de reportes.
+  5.5 Plan de Choque (resultados rapidos en primeras 4 semanas): poner en
+      produccion el modulo de clasificacion ABC y las alertas basicas de
+      reabastecimiento.
+  5.6 PDM (mejoras a largo plazo, semanas 5-8): integrar el modulo de
+      prediccion estacional y el chatbot de analisis con Gemini API.
+
+Entregable: Sistema desplegado en produccion + manual de usuario +
+            plan de mantenimiento y gestion de obsolescencia documentado.
+
+
+========================================================================
+  SECCIÓN 4 – JUSTIFICACIÓN DE LAS DECISIONES
+========================================================================
+
+4.1 JUSTIFICACION DE LOS CRITERIOS DE ADQUISICION
+
+Los cinco criterios seleccionados no fueron escogidos de forma arbitraria.
+Responden a las herramientas conceptuales trabajadas en clase y a las
+necesidades reales del caso:
+
+El criterio de TCO se justifica porque Bucaclínicos es una empresa pequeña
+que no puede comprometer su flujo de caja en tecnologia que parezca economica
+al inicio pero que genere costos ocultos insostenibles en el mediano plazo.
+Como se demostro en el ejemplo del iceberg financiero, el 75% del costo total
+esta en la operacion y mantenimiento, no en la adquisicion. Ignorar ese 75%
+seria un error estrategico para cualquier organización de este tamaño.
+
+El criterio de SLA es fundamental porque la farmacia opera en horario extendido
+y una interrupcion del sistema implica atencion manual con riesgo de errores en
+el registro de inventario. El SLA del 98% anual establece un limite tolerable
+que balancean costo de infraestructura con continuidad operacional. Exigir un
+99.999% seria inncesario para este caso y demasiado costoso.
+
+La decision Make vs. Buy se justifica porque el componente diferenciador del
+proyecto (los modelos de ML con prediccion estacional para Bucaramanga) no
+existe como solucion comercial empaquetada. Las herramientas estandar de
+gestion de inventario no incorporan la variable climatica local ni el analisis
+ABC con rentabilidad personalizado para el catalogo de Bucaclínicos. Por eso
+se desarrolla internamente (Make). En cambio, la infraestructura de nube y la
+base de datos se adquieren como servicio (Buy) porque son commodities donde
+no tiene sentido invertir en servidores propios.
+
+El criterio de seguridad y cumplimiento normativo es innegociable. La Ley 1581
+de 2012 establece obligaciones claras sobre el tratamiento de datos personales,
+y el sistema maneja informacion de transacciones comerciales. Ademas, como se
+reviso en clase con el caso WannaCry, los sistemas de salud sin seguridad
+adecuada son vectores criticos de ataque. Diseñar la seguridad desde los
+cimientos (no como un complemento posterior) es la unica estrategia viable.
+
+El criterio de escalabilidad y gestion de obsolescencia se justifica porque
+el ciclo de vida tecnologico es predecible: sin plan de renovacion, el sistema
+comenzara a tener incompatibilidades en el año 2, perdera soporte del
+proveedor en el año 3-4 y en el año 5 puede convertirse en una vulnerabilidad
+activa. Planificar ese ciclo desde el inicio, con presupuesto garantizado para
+renovacion, evita la "deuda tecnica" que tarde o temprano paraliza el crecimiento
+del negocio.
+
+4.2 JUSTIFICACION DE LA PLANIFICACION INICIAL
+
+Las cinco fases propuestas siguen el flujo logico del ciclo de adquisicion
+estudiado: analisis → mercado → RFP → negociacion → implementacion. Este orden
+no es caprichoso, cada fase depende de los entregables de la anterior:
+
+Sin un analisis riguroso de necesidades (Fase 1) no se puede redactar una RFP
+coherente ni evaluar alternativas con criterios objetivos. Sin el estudio de
+mercado (Fase 2) la decision Make vs. Buy seria una opinion sin datos. Sin la
+RFP formal (Fase 3) la negociacion carece de un marco de referencia y el
+proveedor tiene ventaja en la mesa de negociacion.
+
+La implementacion se estructuro en dos etapas (Plan de Choque + PDM) porque
+Bucaclínicos necesita resultados rapidos que justifiquen la inversion ante los
+propietarios del negocio, pero al mismo tiempo el sistema completo de prediccion
+ML requiere tiempo de entrenamiento, validacion y ajuste fino que no puede
+apresurarse sin comprometer la precision del modelo.
+
+Los tiempos asignados a cada fase son estimados conservadores que incluyen
+un margen de contingencia del 20% ante imprevistos tecnicos o administrativos,
+lo cual es consistente con la metodologia de planificacion de proyectos TI
+recomendada por el PMBOK y los marcos de gestion estudiados durante el semestre.
+
+4.3 ALINEACION CON LOS OBJETIVOS ESTRATEGICOS DE BUCACLÍNICOS
+
+La seleccion de criterios y la planificacion propuesta estan alineadas con los
+tres objetivos estrategicos del caso:
+
+  ECONOMICO: Reducir las perdidas por vencimiento de productos (estimadas en
+  30% de mejora con el analisis ABC automatizado) y corregir los productos con
+  rentabilidad negativa antes de que impacten el flujo de caja.
+
+  OPERACIONAL: Liberar al personal de inventario de tareas manuales repetitivas
+  (estimado 3-5 horas semanales) mediante la automatizacion de clasificacion y
+  generacion de alertas.
+
+  ESTRATEGICO: Posicionar a Bucaclínicos como una farmacia data-driven en
+  Bucaramanga, con un sistema escalable que puede extenderse a nuevas
+  sucursales e integrarse con datos epidemiologicos oficiales del Ministerio
+  de Salud en una segunda fase del proyecto.
+
+
+================================================================================
+  REFERENCIAS (NORMA APA V.7)
+================================================================================
+
+Unidades Tecnológicas de Santander. (2026). Material de clase: Dominando el TCO
+    de TI [Diapositiva de presentación]. Asignatura Selección y Evaluación
+    de Tecnología, Semestre VI.
+
+Unidades Tecnológicas de Santander. (2026). Playbook Estratégico de Adquisición
+    Tecnológica [Diapositiva de presentación]. Asignatura Selección y Evaluación
+    de Tecnología, Semestre VI.
+
+Unidades Tecnológicas de Santander. (2026). Plan Estratégico de TI: Ciclo de
+    vida, seguridad y disponibilidad [Diapositiva de presentación]. Asignatura
+    Selección y Evaluación de Tecnología, Semestre VI.
+
+Vargas Hernández, I. A., & Segura Rincon, Y. S. (2026). Informe Final del
+    Proyecto: Sistema de IA para predicción de demanda y optimización de
+    inventario de medicamentos – Bucaclínicos S.A.S. Unidades Tecnológicas
+    de Santander.
+
+Project Management Institute. (2021). A guide to the project management body
+    of knowledge (PMBOK guide) (7.ª ed.). Project Management Institute.
+
+Chapman, G. (s.f.). CRISP-DM: Cross Industry Standard Process for Data Mining.
+    SAS Institute.
+
+================================================================================
+  FIN DEL INFORME
+  Asignatura: Selección y Evaluación de Tecnología – Semestre VI
+  Caso: Bucaclínicos S.A.S. – Bucaramanga, Colombia
+================================================================================

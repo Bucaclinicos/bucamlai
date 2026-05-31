@@ -1,0 +1,115 @@
+GUÍA PARA LA SUSTENTACIÓN DE LOS PROYECTOS DE AULA
+1. Contexto del Negocio y Problema Organizacional
+Explicar:
+• Situación actual de la empresa.
+• Problemas identificados.
+• Impacto operativo y tecnológico.
+• Necesidades del cliente.
+2. Encaje entre Propuesta de Valor y Segmento de Mercado
+Explicar:
+• Qué problema resuelve la tecnología.
+• Cómo se relaciona con el cliente objetivo.
+• Jobs to be done.
+• Dolores y ganancias.
+• Value Proposition Canvas.
+3. Selección de la Solución Tecnológica
+Sustentar:
+• Alternativas evaluadas.
+• Comparación tecnológica.
+• Criterios utilizados.
+• Justificación de la solución elegida.
+Temas para tener en cuenta según les corresponda:
+• ERP
+• SaaS
+• Open Source
+• Desarrollo a medida
+• Escalabilidad
+• Compatibilidad
+• Seguridad
+• Soporte técnico
+• ROI y TCO
+4. Matriz Ponderada y Toma de Decisiones
+Explicar:
+• Cómo se construyó la matriz.
+• Criterios evaluados.
+• Asignación de pesos.
+• Calificaciones.
+• Resultado final.
+La matriz debe evidenciar una decisión basada en datos y no subjetiva
+5. Plan de Implementación Tecnológica
+Presentar:
+• Fases del proyecto.
+• Actividades principales.
+• Responsables.
+• Recursos.
+• Riesgos.
+• Entregables.
+Aspectos relacionados:
+• Diagnóstico
+• Configuración
+• Migración de datos
+• Capacitación
+• Puesta en producción
+• Soporte post-implementación
+6. Cronograma o Diagrama de Gantt
+Los estudiantes deberán explicar:
+• Secuencia lógica de actividades.
+• Dependencias.
+• Duraciones.
+• Responsables.
+• Fechas estimadas.
+Herramientas sugeridas:
+• Gantt Project
+• Trello
+• Asana
+• Microsoft Project
+• Excel
+7. Monitoreo y Control del Proyecto
+Explicar:
+• Cómo se hizo el seguimiento al proyecto.
+• KPIs.
+• Gestión de incidencias.
+• Acciones correctivas.
+• Soporte y monitoreo.
+8. Negociación Tecnológica y Solución de Conflictos
+Sustentar:
+• Técnicas de negociación utilizadas.
+• Estrategia gana-gana.
+• Manejo de conflictos.
+• Comunicación técnica.
+• Liderazgo negociador.
+9. Acta de Negociación y Cierre de Acuerdos
+Explicar:
+• Condiciones del acuerdo.
+• Precio y forma de pago.
+• Soporte y garantías.
+• Plazos de implementación.
+• Compromisos de las partes.
+Elementos obligatorios:
+• Cliente
+• Proveedor
+• Alcance funcional
+• Garantías
+• SLA
+• Firmas
+10. Conclusiones Estratégicas del Proyecto
+La sustentación debe finalizar explicando:
+• Beneficios esperados.
+• Impacto organizacional.
+• Viabilidad técnica.
+• Viabilidad financiera.
+• Escalabilidad futura.
+• Valor agregado de la solución.
+Requisitos Presentación Digital Proyecto de Aula
+Cada grupo deberá diseñar una presentación en PowerPoint, Canva, Prezi u otra herramienta
+de presentación digital con la participación de todos los integrantes. Explicación técnica y
+argumentativa, dominio conceptual de los temas y evidencias visuales como: Canvas, Matriz
+ponderada, Cronograma/Gantt, Acta de negociación y Arquitectura o solución tecnológica.
+Tiempo estimado: 15 a 20 minutos por grupo.
+Requisitos Presentación Digital Proyecto Integrador
+Título
+Planteamiento del Problema
+Objetivos y Justificación (Modelo de Encaje Canvas Propuesta de Valor - Segmentación de
+Mercado)
+Presentación de la Aplicación
+Tiempo estimado: 15 a 20 minutos por grupo.

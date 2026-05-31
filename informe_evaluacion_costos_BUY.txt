@@ -1,0 +1,709 @@
+================================================================================
+  INFORME DE EVALUACIÓN DE COSTOS Y JUSTIFICACIÓN DE LA ESTRATEGIA BUY
+  Evaluación de costos y justificación de la estrategia BUY para la solución
+  tecnológica propuesta
+
+  Integrantes:
+    Iván Andrés Vargas Hernández
+    Javier Steven Becerra Mantilla
+    Angel Santiago Jaimes Moreno
+    Yeison Stiven Segura Rincon
+    Jhon Fredi Martínez Diaz
+
+  Asignatura: Selección y Evaluación de Tecnología
+  Semestre: VI
+  Docente: Alexander Anchicoque
+  Institución: Unidades Tecnológicas de Santander
+  Fecha: Abril 2026
+================================================================================
+
+
+========================================================================
+  INTRODUCCIÓN
+========================================================================
+
+En la actividad anterior analizamos el problema de Bucaclínicos desde el punto
+de vista del cliente: qué necesitaban, qué criterios debían tener en cuenta y
+cómo deberían planear la adquisición de una solución tecnológica. Ahora el
+enfoque cambia completamente.
+
+En este informe nosotros somos los proveedores. Eso significa que tenemos que
+presentarle a Bucaclínicos cuánto les va a costar contratarnos, qué les estamos
+ofreciendo exactamente, por qué vale la pena pagarnos a nosotros en lugar de que
+ellos lo hagan solos (la famosa decisión MAKE vs. BUY), y qué servicios vienen
+incluidos antes y después de la venta.
+
+Para eso vamos a usar el análisis de Costo Total de Propiedad (TCO), que básicamente
+es dejar de mirar solo el precio de entrada y ver cuánto cuesta la solución en
+total durante los próximos 5 años, incluyendo los costos que normalmente la gente
+se olvida de calcular.
+
+El sistema que estamos ofreciendo es BucaMLAI: un sistema web con inteligencia
+artificial que predice la demanda de medicamentos, clasifica el inventario
+automáticamente y genera alertas de reabastecimiento. Todo lo que Bucaclínicos
+necesita para dejar de perder plata por vencimientos y desabastecimientos.
+
+
+========================================================================
+  SECCIÓN 1 – CONTEXTO BREVE (RECORDATORIO DEL CASO)
+========================================================================
+
+Bucaclínicos S.A.S. es una farmacia en Bucaramanga que todavía maneja su
+inventario a ojo, sin ningún sistema que le ayude a anticipar cuándo se va a
+acabar un medicamento o cuáles están próximos a vencerse. Eso les genera dos
+problemas que les están costando plata directamente:
+
+  - Productos que se vencen en bodega porque compraron demasiado de medicamentos
+    que casi nadie pide (pérdida estimada entre 5% y 10% del inventario activo).
+
+  - Faltante de medicamentos en temporadas donde más los necesitan, como en los
+    meses de lluvia cuando se dispara la demanda de antibióticos, antihistamínicos
+    y antiparasitarios.
+
+Nuestra solución, BucaMLAI, ataca esos dos problemas directamente con modelos de
+Machine Learning entrenados con el historial de ventas de la propia farmacia.
+Ya tenemos construidos los artefactos de ingeniería: el SRS bajo IEEE 830, el
+análisis CRISP-DM de las fases 1 y 2, historias de usuario, mockups en Balsamiq
+y un prototipo funcional en HTML/CSS/JS.
+
+Es decir, no estamos vendiendo una promesa. Estamos vendiendo algo que ya existe
+y que ya fue diseñado específicamente para este caso.
+
+
+========================================================================
+  SECCIÓN 2 – ANÁLISIS DE COSTO TOTAL DE PROPIEDAD (TCO)
+========================================================================
+
+El TCO es la manera correcta de calcular cuánto cuesta una tecnología de verdad,
+porque incluye no solo lo que se paga al inicio, sino todo lo que viene después
+durante la vida útil del sistema. En clase vimos que el error más común de las
+empresas es fijarse solo en el precio de compra y olvidarse del iceberg: el 75%
+del costo real está escondido debajo del agua.
+
+Para este análisis proyectamos los costos a 5 años, que es el horizonte estándar
+para este tipo de sistemas.
+
+------------------------------------------------------------------------
+2.1 COSTOS VISIBLES (la punta del iceberg)
+------------------------------------------------------------------------
+
+Estos son los costos que Bucaclínicos vería desde el primer día.
+
+INVERSIÓN INICIAL (pago único al contratar):
+
+  Concepto                                         Valor (COP)
+  -----------------------------------------------  ---------------
+  Licencia de uso del sistema BucaMLAI             $2.200.000
+  Despliegue y configuración en AWS EC2            $650.000
+  Migración e integración de datos históricos      $450.000
+  Capacitación inicial del personal (2 jornadas)  $500.000
+  -----------------------------------------------  ---------------
+  SUBTOTAL INVERSIÓN INICIAL                       $3.800.000
+
+  Nota sobre la licencia: el valor de $2.200.000 ya incluye los modelos de ML
+  entrenados y ajustados para el catálogo de Bucaclínicos. No es una licencia
+  genérica de software; es una solución hecha a la medida del negocio.
+
+INFRAESTRUCTURA EN LA NUBE (costo mensual recurrente):
+
+  Servicio                            Mensual     Anual
+  ----------------------------------  ----------  ----------
+  AWS EC2 (instancia t3.micro)        $40.000     $480.000
+  Clever Cloud PostgreSQL (Basic)     $20.000     $240.000
+  Gemini API (consumo promedio)       $15.000     $180.000
+  ----------------------------------  ----------  ----------
+  SUBTOTAL INFRAESTRUCTURA            $75.000     $900.000
+
+  Por qué usamos AWS y Clever Cloud: ambas son servicios en la nube que nos
+  permiten no tener que comprar servidores físicos, lo cual es perfecto para una
+  microempresa como Bucaclínicos. El riesgo de que el hardware quede obsoleto lo
+  asume el proveedor cloud, no ellos.
+
+------------------------------------------------------------------------
+2.2 COSTOS INVISIBLES (el resto del iceberg)
+------------------------------------------------------------------------
+
+Estos son los costos que la mayoría de las empresas no calculan al inicio y que
+luego les dan sorpresas desagradables. Nosotros los dejamos claros desde el
+principio porque así funciona una relación seria con un cliente.
+
+  Concepto                                         Anual
+  -----------------------------------------------  ----------
+  Mantenimiento correctivo y preventivo            $1.200.000
+  Actualizaciones del sistema (parches y mejoras) $400.000
+  Capacitación anual de usuarios                   $150.000
+  Soporte técnico nivel 2 (canal digital)          Incluido en mantenimiento
+  Contingencia operativa (10%)                     $165.000
+  -----------------------------------------------  ----------
+  SUBTOTAL COSTOS INVISIBLES                       $1.915.000/año
+
+  Sobre el mantenimiento: esto cubre que si algo falla, nosotros lo arreglamos.
+  También incluye revisión mensual del rendimiento de los modelos ML, porque
+  un modelo que no se revisa pierde precisión con el tiempo.
+
+  Sobre las actualizaciones: al menos dos veces al año lanzamos mejoras menores.
+  Las mejoras mayores, como agregar el módulo de predicción epidemiológica, se
+  cotizan aparte en una fase 2.
+
+------------------------------------------------------------------------
+2.3 RESUMEN Y PROYECCIÓN TCO A 5 AÑOS
+------------------------------------------------------------------------
+
+  Año     Inversión inicial  Infraestructura  Invisibles  Total año
+  ------  -----------------  ---------------  ----------  ----------
+  Año 0   $3.800.000         $900.000         $1.915.000  $6.615.000
+  Año 1   -                  $900.000         $1.915.000  $2.815.000
+  Año 2   -                  $900.000         $1.915.000  $2.815.000
+  Año 3   -                  $900.000         $1.915.000  $2.815.000
+  Año 4   -                  $900.000         $1.915.000  $2.815.000
+  ------  -----------------  ---------------  ----------  ----------
+  TOTAL                                                   $17.875.000
+
+  TCO TOTAL A 5 AÑOS: $17.875.000 COP
+
+Esto está por debajo del umbral máximo de $18.000.000 COP que Bucaclínicos
+estableció en su análisis de adquisición inicial. En otras palabras, nuestra
+solución cabe dentro del presupuesto que ellos mismos calcularon como viable.
+
+  Distribución del TCO:
+  - Inversión inicial (adquisición): $3.800.000 → 21% del TCO total
+  - Operación y mantenimiento (años 1-4): $14.075.000 → 79% del TCO total
+
+  Esto es completamente consistente con el modelo del iceberg que vimos en clase,
+  donde se estima que el 75% del costo total está en la operación. Aquí el 79%
+  está en la operación, lo cual confirma que nuestro análisis es realista y no
+  estamos "maquillando" los números.
+
+
+========================================================================
+  SECCIÓN 3 – EVALUACIÓN TÉCNICA DE LA SOLUCIÓN
+========================================================================
+
+Ahora vamos a demostrar que BucaMLAI no solo es barata en el TCO, sino que
+técnicamente cumple con lo que Bucaclínicos necesita. Evaluamos cinco criterios
+técnicos: funcionalidad, rendimiento, escalabilidad, compatibilidad y
+sostenibilidad.
+
+------------------------------------------------------------------------
+3.1 FUNCIONALIDAD
+------------------------------------------------------------------------
+
+El sistema hace exactamente lo que el caso requiere, ni más ni menos:
+
+  MÓDULO 1 – Predicción de demanda mensual:
+    Usa un modelo Random Forest Regressor entrenado con el historial de ventas
+    de la farmacia. Predice cuántas unidades de cada medicamento se van a vender
+    el próximo mes, tomando en cuenta los patrones estacionales de Bucaramanga
+    (temporadas de lluvia y sus enfermedades asociadas como dengue e IRAS).
+
+  MÓDULO 2 – Clasificación ABC del catálogo:
+    Clasifica automáticamente todos los productos en tres categorías según su
+    nivel de rotación y rentabilidad: A (los que más venden y más dejan), B
+    (rotación media) y C (los que casi no se mueven). Esto le dice a la farmacia
+    en cuáles productos enfocarse y cuáles revisar o descontinuar.
+
+  MÓDULO 3 – Alertas de reabastecimiento:
+    Genera alertas con mínimo 72 horas de anticipación antes de que un producto
+    llegue al stock mínimo definido. Se notifica directamente en el dashboard
+    y opcionalmente por correo electrónico.
+
+  MÓDULO 4 – Análisis de canasta de compra:
+    Usando los algoritmos Apriori y FP-Growth identifica qué productos se compran
+    juntos con frecuencia. Ejemplo práctico: si el 70% de las personas que compran
+    ibuprofeno también compran omeprazol, la farmacia puede organizar mejor su
+    espacio y hacer combos de venta.
+
+  MÓDULO 5 – Dashboard web con asistente Gemini:
+    Una interfaz web responsive donde se visualizan todas las predicciones,
+    alertas y reportes. Incluye un asistente conversacional basado en Gemini API
+    que permite hacer preguntas en lenguaje natural como "¿cuáles productos se van
+    a vencer este mes?" o "¿qué antibióticos debo pedir para la temporada de
+    lluvia?".
+
+------------------------------------------------------------------------
+3.2 RENDIMIENTO
+------------------------------------------------------------------------
+
+Un sistema lento que nadie usa es igual a cero. Por eso definimos métricas
+concretas de rendimiento que garantizamos contractualmente:
+
+  Métrica                                         Valor garantizado
+  ----------------------------------------------  ------------------
+  Tiempo de carga del dashboard                   < 2 segundos
+  Tiempo de respuesta a consulta de predicción    < 5 segundos
+  Frecuencia de reentrenamiento del modelo        Cada 30 días (automático)
+  Capacidad de usuarios simultáneos               Hasta 5 usuarios (suficiente
+                                                  para el tamaño de Bucaclínicos)
+  Procesamiento de alertas en tiempo real         Cada 6 horas
+
+  Los modelos ML se reentrenan mensualmente para que no pierdan precisión con
+  el tiempo. Esto es crítico porque si el modelo aprende patrones viejos y no se
+  actualiza, sus predicciones van a ser cada vez más malas.
+
+------------------------------------------------------------------------
+3.3 ESCALABILIDAD
+------------------------------------------------------------------------
+
+Sabemos que hoy Bucaclínicos es una sola farmacia, pero si el negocio crece,
+el sistema tiene que crecer con él. Diseñamos la arquitectura pensando en eso
+desde el inicio.
+
+  - La API REST permite agregar nuevos módulos sin tocar el código central del
+    sistema. Si mañana quieren integrar datos epidemiológicos del Ministerio de
+    Salud, es cuestión de conectar un nuevo endpoint, no de reescribir todo.
+
+  - AWS EC2 permite escalar verticalmente (más RAM, más CPU) en minutos si el
+    volumen de datos aumenta, sin tener que migrar de plataforma.
+
+  - La arquitectura soporta múltiples sucursales desde el año 2 del sistema,
+    agregando una nueva instancia de base de datos en Clever Cloud sin afectar
+    la farmacia original.
+
+  - Los modelos de ML están modularizados, lo que significa que se puede cambiar
+    el algoritmo de predicción en una versión futura sin afectar el resto del
+    sistema.
+
+------------------------------------------------------------------------
+3.4 COMPATIBILIDAD
+------------------------------------------------------------------------
+
+Aquí una ventaja grande frente a otras soluciones del mercado: BucaMLAI es
+100% basado en web, lo que significa que no hay nada que instalar en los
+computadores de la farmacia.
+
+  - Funciona desde cualquier navegador moderno (Chrome, Firefox, Edge) sin
+    necesidad de instalar nada.
+  - Compatible con computadores de escritorio, portátiles y tablets.
+  - No requiere Windows específico ni macOS. Donde haya internet, funciona.
+  - La API REST permite en el futuro conectar BucaMLAI con un sistema de punto
+    de venta si Bucaclínicos decide comprar uno.
+
+------------------------------------------------------------------------
+3.5 SOSTENIBILIDAD EN EL TIEMPO
+------------------------------------------------------------------------
+
+Este punto es el que más se ignora y el que más problemas genera a largo plazo.
+En clase vimos el ejemplo del caso WannaCry, donde hospitales usaban software
+desactualizado y eso los dejó vulnerables. Nosotros tenemos un plan claro para
+evitar que eso le pase a Bucaclínicos:
+
+  Plan de ciclo de vida del sistema BucaMLAI:
+
+  Año 1-2:  Operación normal. Mantenimiento mensual y actualizaciones menores
+            programadas. Primera revisión del rendimiento de los modelos.
+
+  Año 2:    Evaluación formal del sistema: ¿siguen siendo precisas las
+            predicciones? ¿Hay nuevas herramientas de ML que mejorarían el
+            rendimiento? Reporte entregado al cliente.
+
+  Año 3-4:  Si la evaluación del año 2 lo recomienda, migración a modelos de ML
+            más actualizados. Este costo está incluido en las actualizaciones
+            anuales.
+
+  Año 5:    Evaluación de reemplazo o renovación completa. Para ese momento, se
+            proyecta que Gemini API y otros LLMs habrán mejorado suficientemente
+            como para incorporar un módulo de análisis mucho más potente.
+
+  Tecnologías que garantizan sostenibilidad:
+  - Python, FastAPI y PostgreSQL: todas open source, sin riesgo de que el
+    proveedor desaparezca o cambie su política de licencias.
+  - AWS EC2 y Clever Cloud: plataformas maduras con SLA garantizados por
+    contrato con el proveedor de nube.
+  - Los modelos ML son propiedad de Bucaclínicos, no quedan bloqueados en
+    nuestra empresa.
+
+
+========================================================================
+  SECCIÓN 4 – PROPUESTA DE VALOR COMO PROVEEDOR
+========================================================================
+
+Más allá del sistema en sí, lo que ofrecemos como equipo de trabajo incluye
+una serie de servicios antes y después de la venta que hacen la diferencia
+frente a simplemente comprar un software genérico.
+
+------------------------------------------------------------------------
+4.1 SERVICIOS DE PREVENTA
+------------------------------------------------------------------------
+
+Antes de firmar cualquier contrato, ofrecemos:
+
+  LEVANTAMIENTO DE REQUERIMIENTOS:
+    Reuniones con la administración de Bucaclínicos para entender exactamente
+    cómo manejan el inventario hoy, qué errores cometen con más frecuencia y
+    qué esperan del sistema. Esto ya lo hicimos en la Fase 1 del proyecto y nos
+    permitió diseñar algo que realmente se ajusta a ellos, no un sistema genérico.
+
+  DEMOSTRACIÓN EN VIVO:
+    Mostramos el prototipo funcional con datos reales de la farmacia (anonimizados
+    para proteger información sensible). El cliente puede ver cómo luce el
+    dashboard, cómo se generan las alertas y cómo funciona el asistente Gemini
+    antes de comprometerse.
+
+  ASESORÍA TÉCNICA GRATUITA:
+    Si el cliente tiene dudas sobre qué plan de AWS conviene, si es mejor comprar
+    un dominio propio o usar el nuestro, o qué datos históricos de ventas necesita
+    preparar para la migración, lo asesoramos sin costo adicional durante la etapa
+    de evaluación.
+
+  PROPUESTA ECONÓMICA DETALLADA:
+    Entregamos el análisis completo de TCO que está en este informe, para que el
+    cliente tenga claridad total sobre lo que va a pagar en los próximos 5 años.
+    Sin sorpresas.
+
+------------------------------------------------------------------------
+4.2 ACUERDO DE NIVEL DE SERVICIO (SLA)
+------------------------------------------------------------------------
+
+El SLA es básicamente el contrato donde decimos qué tan disponible va a estar
+el sistema y qué pasa si no cumplimos. Estos son los compromisos que ofrecemos:
+
+  Métrica                                         Compromiso
+  ----------------------------------------------  --------------------------------
+  Disponibilidad del sistema                      98% anual (≤ 175 horas de
+                                                  inactividad al año)
+  Tiempo de respuesta ante incidente crítico      < 4 horas
+  Tiempo de respuesta ante soporte general        < 24 horas hábiles
+  Backups automáticos de la base de datos         Diarios, retención de 30 días
+  Tiempo de recuperación ante desastre (RTO)      Máximo 24 horas
+  Canal de soporte disponible                     WhatsApp Business + correo
+  Horario de soporte                              Lunes a sábado, 8am – 8pm
+
+  Por qué ofrecemos 98% y no 99.9%: porque el costo de infraestructura para
+  garantizar 99.9% sería desproporcionado para el tamaño del negocio. El 98%
+  implica máximo 175 horas de inactividad al año, y dado que la farmacia opera
+  12 horas diarias de lunes a sábado, eso se traduce en aproximadamente 14 días
+  de falla en el peor escenario anual, que en la práctica raramente ocurre.
+
+  Las penalizaciones por incumplimiento del SLA se definen contractualmente:
+  si el sistema tiene más inactividad que la establecida en un mes, ese mes
+  se descuenta del costo de mantenimiento proporcionalmente.
+
+------------------------------------------------------------------------
+4.3 SERVICIOS DE POSVENTA
+------------------------------------------------------------------------
+
+Aquí es donde muchos proveedores fallan: venden y desaparecen. Nosotros no.
+
+  SOPORTE TÉCNICO CONTINUO:
+    Canal de WhatsApp Business y correo electrónico para reportar problemas.
+    Tiempo de respuesta garantizado según el SLA. Los problemas críticos (sistema
+    caído, datos corruptos) tienen prioridad absoluta.
+
+  MANTENIMIENTO PREVENTIVO MENSUAL:
+    Revisión del rendimiento de los modelos de ML, actualización de librerías de
+    seguridad, análisis de logs del sistema para detectar problemas antes de que
+    los sienta el usuario. El cliente recibe un reporte mensual de salud del
+    sistema.
+
+  MANTENIMIENTO CORRECTIVO:
+    Cuando algo falla (y eventualmente algo siempre falla), lo reparamos. El
+    costo de este mantenimiento ya está incluido en el valor anual de $1.200.000.
+
+  ACTUALIZACIONES PROGRAMADAS:
+    Dos veces al año lanzamos una actualización del sistema con mejoras de
+    rendimiento, correcciones de seguridad y eventualmente nuevas funcionalidades
+    menores. Esto se coordina con el cliente para no interrumpir operaciones.
+
+  CAPACITACIÓN ANUAL:
+    Una jornada de actualización para el personal si hay cambios significativos
+    en la interfaz o si hay rotación de empleados que necesitan aprender a usar
+    el sistema desde cero.
+
+  INFORME ANUAL DE RENDIMIENTO:
+    Al cierre de cada año entregamos un análisis de qué tan bien funcionaron los
+    modelos, cuántas alertas se generaron, cuáles se cumplieron, y una
+    recomendación para el año siguiente.
+
+
+========================================================================
+  SECCIÓN 5 – JUSTIFICACIÓN DE LA ESTRATEGIA BUY
+========================================================================
+
+La pregunta central de este informe es: ¿por qué Bucaclínicos debería
+contratarnos a nosotros (BUY) en lugar de desarrollar este sistema ellos mismos
+(MAKE)?
+
+------------------------------------------------------------------------
+5.1 COMPARACIÓN ECONÓMICA: BUY vs. MAKE
+------------------------------------------------------------------------
+
+Lo primero es poner los números sobre la mesa.
+
+  OPCIÓN BUY (contratarnos a nosotros):
+  - TCO a 5 años: $17.875.000 COP (ver Sección 2)
+  - Tiempo hasta tener el sistema en producción: 4 semanas (módulo básico)
+  - Riesgo económico: bajo (precio fijo acordado en contrato)
+
+  OPCIÓN MAKE (que Bucaclínicos lo desarrolle internamente):
+
+  Si Bucaclínicos decidiera contratar a un desarrollador freelance para hacer
+  esto desde cero, los costos serían aproximadamente:
+
+  Concepto                                         Valor (COP)
+  -----------------------------------------------  --------------------
+  Desarrollador freelance con experiencia en ML
+  (mínimo 8 meses de trabajo)                      $2.000.000/mes × 8
+                                                   = $16.000.000
+  Servidor propio o configuración inicial en AWS   $3.500.000
+  Cursos y materiales para que el dev aprenda
+  los algoritmos ML específicos del caso           $2.000.000
+  Tiempo del administrador de la farmacia
+  dedicado a coordinar el desarrollo               No cuantificable
+  -----------------------------------------------  --------------------
+  SUBTOTAL DESARROLLO                              $21.500.000
+
+  Mantenimiento años 1-4 (con el mismo dev o
+  buscando a alguien nuevo si se va):              $1.500.000/año × 4
+                                                   = $6.000.000
+  -----------------------------------------------  --------------------
+  TOTAL MAKE A 5 AÑOS (estimado conservador)       $27.500.000
+
+  Resumen comparativo:
+
+  Opción     TCO 5 años estimado   Tiempo implementación   Garantía técnica
+  ---------  --------------------  ----------------------  ----------------
+  BUY        $17.875.000 COP       4 semanas (módulo base) SLA documentado
+  MAKE        $27.500.000 COP       8-12 meses (mínimo)    Ninguna
+
+  La diferencia es de aproximadamente $9.625.000 COP a favor del BUY, y eso
+  sin contar los riesgos del MAKE que se explican más adelante.
+
+------------------------------------------------------------------------
+5.2 ARGUMENTOS TÉCNICOS PARA EL BUY
+------------------------------------------------------------------------
+
+  ARGUMENTO 1 – EL SISTEMA YA EXISTE:
+    No hay que esperar meses de desarrollo. Ya tenemos el prototipo funcional,
+    los modelos ML entrenados en los datos de Bucaclínicos y la arquitectura
+    definida. La diferencia entre el prototipo actual y el sistema en producción
+    es básicamente la configuración del servidor en AWS y la migración final de
+    datos. Eso son semanas, no meses.
+
+  ARGUMENTO 2 – EXPERIENCIA ESPECÍFICA EN EL PROBLEMA:
+    Desarrollamos BucaMLAI entendiendo exactamente el problema de Bucaclínicos.
+    Los modelos están calibrados para los patrones estacionales de Bucaramanga
+    (dengue, IRAS, parasitosis en temporadas de lluvia), no son modelos genéricos
+    sacados de un tutorial de internet. Un desarrollador contratado externamente
+    necesitaría semanas solo para entender el contexto.
+
+  ARGUMENTO 3 – STACK TECNOLÓGICO CONOCIDO Y PROBADO:
+    Usamos tecnologías que conocemos bien (FastAPI, PostgreSQL, scikit-learn,
+    Python) y que tienen comunidades activas de soporte. No estamos improvisando
+    con tecnologías de moda que pueden desaparecer en dos años.
+
+  ARGUMENTO 4 – SEPARACIÓN ENTRE CORE Y COMMODITY:
+    Una ventaja de nuestra propuesta es que separamos bien qué desarrollamos
+    nosotros (los modelos ML y la lógica del negocio) y qué compramos como
+    servicio (AWS EC2, Clever Cloud). Esto sigue exactamente el principio Make
+    vs. Buy que vimos en clase: desarrollamos lo que nos da ventaja diferencial y
+    compramos lo que es commodity.
+
+------------------------------------------------------------------------
+5.3 ARGUMENTOS OPERATIVOS PARA EL BUY
+------------------------------------------------------------------------
+
+  ARGUMENTO 1 – BUCACLÍNICOS NO ES UNA EMPRESA DE TECNOLOGÍA:
+    El negocio de la farmacia es vender medicamentos, no administrar servidores
+    ni entrenar modelos de ML. Desarrollar y mantener un sistema de software
+    internamente requiere capacidades que Bucaclínicos no tiene y que construir
+    las tomaría años. Es exactamente lo que no deberían estar haciendo.
+
+  ARGUMENTO 2 – RIESGO DE DEPENDENCIA A UNA PERSONA EN EL MAKE:
+    Si contratan a un desarrollador freelance y esa persona se va o no cumple
+    los plazos, el proyecto queda en el aire. Con nosotros el riesgo está
+    distribuido en un equipo de 5 personas y las responsabilidades están
+    documentadas.
+
+  ARGUMENTO 3 – CONTINUIDAD GARANTIZADA POR SLA:
+    Con el MAKE, si el sistema falla un sábado a las 6 pm, ¿quién lo arregla?
+    ¿El desarrollador freelance está disponible? Con nosotros, el SLA garantiza
+    respuesta en menos de 4 horas ante incidentes críticos, en el horario
+    comercial de la farmacia.
+
+------------------------------------------------------------------------
+5.4 ARGUMENTOS DE RIESGO PARA EL BUY
+------------------------------------------------------------------------
+
+  RIESGO MAKE 1 – COSTO DE OPORTUNIDAD:
+    Cada mes que Bucaclínicos espera el sistema MAKE, sigue perdiendo plata por
+    vencimientos y desabastecimientos. Con estimaciones conservadoras de pérdida
+    del 5% del inventario activo por vencimientos, 8 meses de espera pueden
+    representar pérdidas que superan el costo de contratarnos.
+
+  RIESGO MAKE 2 – CALIDAD TÉCNICA DEL MODELO ML SIN SUPERVISIÓN:
+    Entrenar un modelo de ML mal calibrado puede ser peor que no tener ninguno.
+    Si el modelo predice demanda incorrectamente porque no se validó bien, la
+    farmacia podría comprar inventario equivocado confiando en predicciones
+    erróneas. Nosotros ya pasamos por las fases de validación de los modelos
+    con datos reales.
+
+  RIESGO MAKE 3 – SEGURIDAD DESDE EL INICIO:
+    Un desarrollador externo que no conozca la Ley 1581 de 2012 puede implementar
+    el sistema sin las medidas de protección de datos adecuadas, dejando a
+    Bucaclínicos expuesto a sanciones legales. Nosotros ya tenemos definidos el
+    cifrado TLS 1.2+, la autenticación con JWT y la política de backups que
+    garantizan cumplimiento normativo.
+
+------------------------------------------------------------------------
+5.5 CUÁNDO TENDRÍA SENTIDO EL MAKE (para ser honestos)
+------------------------------------------------------------------------
+
+Seríamos deshonestos si no dijéramos en qué casos el MAKE podría ser mejor.
+El MAKE tendría sentido si Bucaclínicos:
+
+  a) Tuviera un desarrollador interno de planta con experiencia en ML y tiempo
+     disponible para el proyecto.
+  b) Necesitara personalización tan profunda que ningún proveedor externo pudiera
+     lograrla.
+  c) Tuviera una ventaja competitiva directamente vinculada a mantener la
+     tecnología en secreto absoluto.
+
+Ninguno de estos tres casos aplica aquí. La farmacia no tiene personal técnico
+interno, el nivel de personalización que requieren ya está contemplado en nuestra
+propuesta, y el sistema de predicción de inventario no es un secreto comercial
+crítico para su modelo de negocio.
+
+
+========================================================================
+  SECCIÓN 6 – CONCLUSIÓN GRUPAL
+========================================================================
+
+Después de hacer el análisis de TCO, la evaluación técnica y la comparación
+Make vs. Buy, la conclusión del equipo es clara y tiene sustento en cuatro
+dimensiones: económica, técnica, operativa y de riesgo.
+
+DIMENSIÓN ECONÓMICA:
+El TCO de nuestra solución a 5 años es de $17.875.000 COP, que está dentro del
+umbral de $18.000.000 que Bucaclínicos estableció como máximo aceptable en su
+análisis previo. Desarrollar internamente costaría cerca de $27.500.000 en el
+mismo período, una diferencia de casi $10 millones a favor de contratarnos.
+Además, el 79% del costo total está en operación y mantenimiento, no en la
+adquisición, lo cual es consistente con el modelo del iceberg financiero y
+demuestra que el análisis es transparente.
+
+DIMENSIÓN TÉCNICA:
+BucaMLAI cumple con todos los criterios técnicos evaluados: tiene la
+funcionalidad exacta que el caso requiere, rendimiento medido y garantizado,
+una arquitectura escalable basada en API REST que soporta crecimiento futuro,
+compatibilidad total por ser 100% web sin instalaciones, y un plan de ciclo de
+vida documentado que evita el deterioro tecnológico gradual que vimos en clase
+como uno de los principales errores de las organizaciones.
+
+DIMENSIÓN OPERATIVA:
+Bucaclínicos es una farmacia, no una empresa de software. La estrategia BUY les
+permite enfocarse en su negocio mientras nosotros nos encargamos de que la
+tecnología funcione. El plan de preventa y posventa garantiza acompañamiento
+desde la configuración inicial hasta el soporte diario, con un SLA claro y
+penalizaciones documentadas si no cumplimos.
+
+DIMENSIÓN DE RIESGO:
+El MAKE implica riesgos que no se pueden ignorar: dependencia de un solo
+desarrollador externo, tiempo de implementación de 8 a 12 meses durante los
+cuales la farmacia sigue perdiendo dinero, y alta probabilidad de que un modelo
+ML sin validación técnica adecuada entregue predicciones erróneas. El BUY
+mitiga todos esos riesgos porque el sistema ya existe, el equipo ya conoce el
+problema y los compromisos de servicio están contractualizados.
+
+En resumen: la estrategia BUY con nuestro equipo como proveedor es la decisión
+correcta para Bucaclínicos en este momento, tanto por razones económicas como
+por la realidad técnica y operativa del negocio. No es que el MAKE sea imposible,
+es que no tiene ninguna ventaja concreta frente al BUY en este caso específico.
+
+El sistema BucaMLAI está listo para entrar en producción. La decisión de empezar
+está del lado de Bucaclínicos.
+
+
+========================================================================
+  MATRIZ DE COSTOS Y SERVICIOS (RESUMEN EJECUTIVO)
+========================================================================
+
+COSTOS (TCO 5 AÑOS)
+
+  Categoría           Concepto                        Valor COP
+  ------------------  ------------------------------  ---------------
+  VISIBLES            Licencia del sistema            $2.200.000
+  (Inversión          Despliegue AWS EC2              $650.000
+  inicial)            Migración de datos              $450.000
+                      Capacitación inicial            $500.000
+                      SUBTOTAL                        $3.800.000
+
+  VISIBLES            AWS EC2 (t3.micro) × 5 años    $2.400.000
+  (Infraestructura    Clever Cloud PostgreSQL × 5     $1.200.000
+  recurrente)         Gemini API × 5 años             $900.000
+                      SUBTOTAL                        $4.500.000
+
+  INVISIBLES          Mantenimiento × 5 años          $6.000.000
+  (Operación)         Actualizaciones × 5 años        $2.000.000
+                      Capacitación anual × 5 años     $750.000
+                      Contingencia × 5 años           $825.000
+                      SUBTOTAL                        $9.575.000
+  ------------------  ------------------------------  ---------------
+  TOTAL TCO 5 AÑOS                                    $17.875.000
+
+SERVICIOS OFRECIDOS COMO PROVEEDOR
+
+  Tipo          Servicio                              Incluido en
+  ------------  ------------------------------------  ----------------------
+  PREVENTA      Levantamiento de requerimientos       Sin costo adicional
+                Demostración en vivo del prototipo    Sin costo adicional
+                Asesoría técnica de evaluación        Sin costo adicional
+                Análisis TCO detallado                Sin costo adicional
+
+  SLA           Disponibilidad del sistema            98% anual garantizado
+                Respuesta incidente crítico           < 4 horas
+                Respuesta soporte general             < 24 horas hábiles
+                Backups automáticos                   Diarios, 30 días ret.
+                Canal de soporte                      WhatsApp + correo
+
+  POSVENTA      Soporte técnico continuo              Mantenimiento mensual
+                Mantenimiento correctivo              Mantenimiento mensual
+                Mantenimiento preventivo              Mantenimiento mensual
+                Actualizaciones del sistema           2 veces/año
+                Capacitación anual                    1 jornada/año
+                Informe anual de rendimiento          Incluido
+
+
+================================================================================
+  REFERENCIAS (NORMA APA V.7)
+================================================================================
+
+Unidades Tecnológicas de Santander. (2026). Material de clase: Dominando el TCO
+    de TI [Diapositiva de presentación]. Asignatura Selección y Evaluación
+    de Tecnología, Semestre VI.
+
+Unidades Tecnológicas de Santander. (2026). Playbook Estratégico de Adquisición
+    Tecnológica [Diapositiva de presentación]. Asignatura Selección y Evaluación
+    de Tecnología, Semestre VI.
+
+Unidades Tecnológicas de Santander. (2026). Plan Estratégico de TI: Ciclo de
+    vida, seguridad y disponibilidad [Diapositiva de presentación]. Asignatura
+    Selección y Evaluación de Tecnología, Semestre VI.
+
+Vargas Hernández, I. A., Becerra Mantilla, J. S., Jaimes Moreno, A. S., Segura
+    Rincon, Y. S., & Martínez Diaz, J. F. (2026). Informe de Selección y
+    Evaluación de Tecnología – Actividad 1: Planificación de criterios de
+    adquisición y toma de decisiones. Bucaclínicos S.A.S. Unidades Tecnológicas
+    de Santander.
+
+Amazon Web Services. (2024). Amazon EC2 pricing. AWS.
+    https://aws.amazon.com/es/ec2/pricing/
+
+Clever Cloud. (2024). PostgreSQL managed database pricing. Clever Cloud.
+    https://www.clever-cloud.com/pricing/
+
+Google. (2024). Gemini API pricing. Google AI for Developers.
+    https://ai.google.dev/pricing
+
+Project Management Institute. (2021). A guide to the project management body
+    of knowledge (PMBOK guide) (7.ª ed.). Project Management Institute.
+
+International Organization for Standardization. (2013). ISO/IEC 27001:2013
+    Information technology – Security techniques – Information security
+    management systems – Requirements. ISO.
+
+================================================================================
+  FIN DEL INFORME
+  Asignatura: Selección y Evaluación de Tecnología – Semestre VI
+  Caso: Bucaclínicos S.A.S. – Bucaramanga, Colombia
+  Actividad 2: Evaluación de costos y justificación de la estrategia BUY
+================================================================================
