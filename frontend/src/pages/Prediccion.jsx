@@ -64,7 +64,13 @@ export default function Prediccion() {
     setError(''); setCargando(true); setResultado(null)
     postPrediccion({ medicamento: med, meses: Number(meses), usar_prophet: true })
       .then(r => { setResultado(r.data); setMedicamento(med) })
-      .catch(e => setError(e?.response?.data?.detail || e?.response?.data?.error || 'Error al conectar con el backend.'))
+      .catch(e => {
+        const detail = e?.response?.data?.detail
+        const msg = detail
+          ? (typeof detail === 'string' ? detail : detail?.error || JSON.stringify(detail))
+          : (e?.response?.data?.error || 'Error al conectar con el backend.')
+        setError(msg)
+      })
       .finally(() => setCargando(false))
   }
 
