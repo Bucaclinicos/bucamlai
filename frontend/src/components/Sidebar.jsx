@@ -15,8 +15,6 @@ import { useAuth } from '../context/AuthContext'
 import DashboardRoundedIcon    from '@mui/icons-material/DashboardRounded'
 import InventoryRoundedIcon    from '@mui/icons-material/InventoryRounded'
 import BarChartRoundedIcon     from '@mui/icons-material/BarChartRounded'
-import AssessmentRoundedIcon   from '@mui/icons-material/AssessmentRounded'
-import FactCheckRoundedIcon    from '@mui/icons-material/FactCheckRounded'
 import AutoGraphRoundedIcon    from '@mui/icons-material/AutoGraphRounded'
 import WbCloudyRoundedIcon     from '@mui/icons-material/WbCloudyRounded'
 import SmartToyRoundedIcon     from '@mui/icons-material/SmartToyRounded'
@@ -30,8 +28,6 @@ const NAV_BASE = [
       { to: '/',           Icon: DashboardRoundedIcon,  label: 'Dashboard'    },
       { to: '/inventario', Icon: InventoryRoundedIcon,  label: 'Inventario'   },
       { to: '/pareto',     Icon: BarChartRoundedIcon,   label: 'Análisis ABC' },
-      { to: '/metricas',   Icon: AssessmentRoundedIcon, label: 'Métricas'     },
-      { to: '/evaluacion', Icon: FactCheckRoundedIcon,  label: 'Evaluación'   },
     ],
   },
   {
