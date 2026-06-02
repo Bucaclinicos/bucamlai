@@ -33,7 +33,9 @@
       "Bash(dir *)",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\USUARIO\\\\Documents\\\\2026\\\\UNIVERSIDAD\\\\nuevas tecnologias\\\\Integrador\\\\bucamlai\" -Force)",
       "Bash(Select-Object Name, Mode)",
-      "Bash(.\\\\venv\\\\Scripts\\\\python.exe -c \"import cmdstanpy; print\\(cmdstanpy.cmdstan_path\\(\\)\\)\")"
+      "Bash(.\\\\venv\\\\Scripts\\\\python.exe -c \"import cmdstanpy; print\\(cmdstanpy.cmdstan_path\\(\\)\\)\")",
+      "Bash(Select-Object Name, Length)",
+      "Bash(Sort-Object Length)"
     ]
   }
 }

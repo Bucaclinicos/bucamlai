@@ -25,7 +25,7 @@ def prediccion(solicitud: SolicitudPrediccion):
     except Exception as e:
         tb = traceback.format_exc()
         print(f"[ERROR /prediccion] {e}\n{tb}")
-        raise HTTPException(status_code=500, detail={"error": str(e), "traceback": tb})
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.get("/medicamentos")

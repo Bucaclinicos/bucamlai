@@ -347,8 +347,11 @@ def predecir(medicamento: str, meses: int) -> dict:
                 met["puntos_historicos"] = len(serie)
 
             _metricas[medicamento] = met
-            joblib.dump({"tipo": _modelos[medicamento]["tipo"], **_modelos[medicamento], "metricas": met},
-                        os.path.join(RUTA_MODELOS, f"{_slug(medicamento)}.pkl"))
+            try:
+                joblib.dump({"tipo": _modelos[medicamento]["tipo"], **_modelos[medicamento], "metricas": met},
+                            os.path.join(RUTA_MODELOS, f"{_slug(medicamento)}.pkl"))
+            except OSError:
+                pass
 
     datos_med  = _modelos[medicamento]
     met        = _metricas[medicamento]
