@@ -324,11 +324,20 @@ def predecir(medicamento: str, meses: int) -> dict:
     # Cargar o entrenar modelo
     if medicamento not in _modelos:
         pkl_path = os.path.join(RUTA_MODELOS, f"{_slug(medicamento)}.pkl")
+        loaded = False
         if os.path.exists(pkl_path):
-            datos = joblib.load(pkl_path)
-            _modelos[medicamento]  = datos
-            _metricas[medicamento] = datos["metricas"]
-        else:
+            try:
+                datos = joblib.load(pkl_path)
+                _modelos[medicamento]  = datos
+                _metricas[medicamento] = datos["metricas"]
+                loaded = True
+            except Exception:
+                try:
+                    os.remove(pkl_path)
+                except OSError:
+                    pass
+
+        if not loaded:
             serie = _construir_serie(df, medicamento)
             if len(serie) < 2:
                 return {"error": f"'{medicamento}' tiene solo {len(serie)} período(s). Mínimo 2 para predecir."}
