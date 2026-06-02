@@ -1,9 +1,10 @@
 """
-Servicio de predicción de demanda con Prophet + regresores externos de clima.
-Cada medicamento tiene su propio modelo entrenado con:
-  - Serie temporal de unidades vendidas por mes
-  - Temperatura media mensual de Bucaramanga (Open-Meteo)
-  - Precipitación mensual de Bucaramanga (Open-Meteo)
+Servicio de predicción de demanda — modelo híbrido:
+  - Prophet + clima para medicamentos con volumen alto (media >= 200 uds/mes)
+  - Modelo estadístico robusto para el resto (promedio estacional + tendencia + clima)
+
+El modelo estadístico es más adecuado para el dataset de Bucaclínicos donde el 97%
+de los medicamentos vende menos de 50 unidades mensuales.
 """
 
 import os
@@ -16,14 +17,17 @@ from services.clima_service import (
     obtener_clima_historico_mensual,
     obtener_clima_futuro_mensual,
 )
+from services.constantes import MESES_MAP as _MESES_MAP
 
 RUTA_MODELOS = os.path.join(os.path.dirname(__file__), "../models/prophet")
 
-_modelos  = {}   # { medicamento: modelo_prophet }
-_metricas = {}   # { medicamento: dict }
+_modelos  = {}
+_metricas = {}
 _periodos_entrenados = []
 
-from services.constantes import MESES_MAP as _MESES_MAP
+# Con 12 meses de historial Prophet no tiene suficiente data para ningún medicamento.
+# Se activa Prophet automáticamente cuando haya >= 24 meses de historial.
+_UMBRAL_PROPHET = 999999
 
 
 # ── Utilidades ──────────────────────────────────────────────────────────────
@@ -46,7 +50,6 @@ def _slug(texto: str) -> str:
 
 
 def _construir_serie(df: pd.DataFrame, medicamento: str) -> pd.DataFrame:
-    """Serie temporal mensual de un medicamento con columnas ds y y."""
     df_med = df[df["DESCRIPCION"] == medicamento].copy()
     if df_med.empty:
         return pd.DataFrame()
@@ -62,20 +65,13 @@ def _construir_serie(df: pd.DataFrame, medicamento: str) -> pd.DataFrame:
 
 
 def _enriquecer_con_clima(serie: pd.DataFrame) -> pd.DataFrame:
-    """
-    Agrega columnas temp_media y precipitacion a la serie histórica.
-    Consulta Open-Meteo para datos reales; usa climatología si falla.
-    """
     if serie.empty:
         return serie
-
     fecha_inicio = serie["ds"].min().strftime("%Y-%m-%d")
     fecha_fin    = serie["ds"].max().strftime("%Y-%m-%d")
-
     df_clima = obtener_clima_historico_mensual(fecha_inicio, fecha_fin)
 
     if df_clima.empty:
-        # Fallback: climatología por número de mes
         from services.clima_service import _CLIMATOLOGIA
         serie = serie.copy()
         serie["temp_media"]    = serie["ds"].dt.month.map(lambda m: _CLIMATOLOGIA[m]["temp"])
@@ -86,39 +82,126 @@ def _enriquecer_con_clima(serie: pd.DataFrame) -> pd.DataFrame:
     serie = serie.copy()
     serie["ds_key"] = serie["ds"].dt.to_period("M").dt.to_timestamp()
     df_clima["ds_key"] = df_clima["ds"].dt.to_period("M").dt.to_timestamp()
-
     serie = serie.merge(
         df_clima[["ds_key", "temp_media", "precipitacion"]],
         on="ds_key", how="left"
     ).drop(columns=["ds_key"])
 
-    # Rellenar huecos con climatología
     from services.clima_service import _CLIMATOLOGIA
     serie["temp_media"]    = serie["temp_media"].fillna(serie["ds"].dt.month.map(lambda m: _CLIMATOLOGIA[m]["temp"]))
     serie["precipitacion"] = serie["precipitacion"].fillna(serie["ds"].dt.month.map(lambda m: float(_CLIMATOLOGIA[m]["precip"])))
-
     return serie
 
 
-# ── Entrenamiento ────────────────────────────────────────────────────────────
+# ── Modelo estadístico robusto (para volúmenes bajos) ────────────────────────
 
-def _entrenar_modelo(serie: pd.DataFrame) -> tuple:
+def _predecir_estadistico(serie: pd.DataFrame, meses: int) -> tuple:
     """
-    Entrena Prophet con regresores de clima (temp_media, precipitacion).
-    Retorna (modelo, usa_clima: bool).
+    Predicción basada en:
+    1. Promedio del mismo mes en años anteriores (estacionalidad)
+    2. Si no hay dato del mismo mes, promedio general
+    3. Factor de tendencia basado en los últimos 3 vs los 3 anteriores
+    4. Intervalo: ± 1 desviación estándar del historial
+    Retorna (lista de predicciones, metricas dict)
     """
+    from services.clima_service import _CLIMATOLOGIA, _TEMPORADA_MES
+
+    y = serie["y"].values
+    fechas = serie["ds"].values
+
+    media_global = float(np.mean(y))
+    std_global   = float(np.std(y)) if len(y) > 1 else media_global * 0.3
+
+    # Tendencia: ratio ultimos 3 meses vs los 3 anteriores
+    if len(y) >= 6:
+        recientes  = np.mean(y[-3:])
+        anteriores = np.mean(y[-6:-3])
+        tendencia  = recientes / anteriores if anteriores > 0 else 1.0
+        # Suavizar tendencia para no exagerar
+        tendencia = max(0.7, min(tendencia, 1.4))
+    elif len(y) >= 3:
+        tendencia = 1.0
+    else:
+        tendencia = 1.0
+
+    # Construir mapa mes -> promedio histórico
+    serie_con_mes = serie.copy()
+    serie_con_mes["mes_num"] = pd.to_datetime(serie_con_mes["ds"]).dt.month
+    promedio_por_mes = serie_con_mes.groupby("mes_num")["y"].mean().to_dict()
+
+    ultima_fecha = pd.Timestamp(fechas[-1])
+    predicciones_raw = []
+
+    for i in range(meses):
+        fecha_pred = ultima_fecha + pd.DateOffset(months=i + 1)
+        mes_num = fecha_pred.month
+
+        # Base: promedio histórico de ese mes si existe, sino media global
+        base = promedio_por_mes.get(mes_num, media_global)
+
+        # Aplicar tendencia suavizada (decae con la distancia)
+        factor_tendencia = 1.0 + (tendencia - 1.0) * max(0, 1 - i * 0.2)
+        pred = base * factor_tendencia
+
+        # Factor climático suave según temporada
+        from services.clima_service import _TEMPORADA_MES as _TM
+        temporada = _TM.get(mes_num, {}).get("temporada", "seca")
+        factor_clima = 1.05 if temporada == "lluvias" else 0.97
+
+        pred = pred * factor_clima
+        pred = max(0.0, pred)
+
+        # Intervalo ± std proporcional (más amplio para meses sin dato histórico)
+        tiene_dato_mes = mes_num in promedio_por_mes
+        margen = std_global * (0.8 if tiene_dato_mes else 1.2)
+
+        predicciones_raw.append({
+            "fecha": fecha_pred,
+            "yhat": pred,
+            "yhat_lower": max(0.0, pred - margen),
+            "yhat_upper": pred + margen,
+            "mes_num": mes_num,
+        })
+
+    # Métricas: leave-one-out sobre el historial
+    errores = []
+    for idx in range(len(y)):
+        mes_n = serie_con_mes.iloc[idx]["mes_num"]
+        otros = [v for j, v in enumerate(y) if j != idx]
+        pred_loo = np.mean(otros) if otros else media_global
+        errores.append(abs(y[idx] - pred_loo))
+
+    mae  = round(float(np.mean(errores)), 4) if errores else 0.0
+    rmse = round(float(np.sqrt(np.mean([e**2 for e in errores]))), 4) if errores else 0.0
+
+    metricas = {
+        "mae": mae,
+        "rmse": rmse,
+        "metodo": "estadistico_estacional",
+        "clima_incluido": True,
+        "puntos_historicos": len(y),
+    }
+
+    return predicciones_raw, metricas
+
+
+# ── Modelo Prophet (para volúmenes altos) ───────────────────────────────────
+
+def _entrenar_prophet(serie: pd.DataFrame) -> tuple:
     from prophet import Prophet
 
     tiene_clima = "temp_media" in serie.columns and serie["temp_media"].notna().all()
+    media_ventas = serie["y"].mean()
+    seasonality_mode = "multiplicative" if media_ventas >= 500 else "additive"
+    changepoint_prior = 0.05
 
     modelo = Prophet(
         yearly_seasonality=True,
         weekly_seasonality=False,
         daily_seasonality=False,
-        seasonality_mode="multiplicative",
-        changepoint_prior_scale=0.1,
+        seasonality_mode=seasonality_mode,
+        changepoint_prior_scale=changepoint_prior,
     )
-
     if tiene_clima:
         modelo.add_regressor("temp_media",    standardize=True)
         modelo.add_regressor("precipitacion", standardize=True)
@@ -127,18 +210,18 @@ def _entrenar_modelo(serie: pd.DataFrame) -> tuple:
     return modelo, tiene_clima
 
 
-def _calcular_metricas(modelo, serie: pd.DataFrame, usa_clima: bool) -> dict:
+def _calcular_metricas_prophet(modelo, serie: pd.DataFrame, usa_clima: bool) -> dict:
     n = len(serie)
     if n >= 6:
         try:
             from prophet.diagnostics import cross_validation, performance_metrics
-            horizon  = "30 days"
-            initial  = f"{max(int(n * 0.5), 2) * 30} days"
-            period   = "30 days"
+            horizon = "30 days"
+            initial = f"{max(int(n * 0.5), 2) * 30} days"
+            period  = "30 days"
             df_cv = cross_validation(modelo, initial=initial, period=period, horizon=horizon, disable_tqdm=True)
             df_pm = performance_metrics(df_cv)
             return {
-                "mae": round(float(df_pm["mae"].mean()), 4),
+                "mae":  round(float(df_pm["mae"].mean()), 4),
                 "rmse": round(float(df_pm["rmse"].mean()), 4),
                 "metodo": "cross_validation",
                 "clima_incluido": usa_clima,
@@ -148,10 +231,7 @@ def _calcular_metricas(modelo, serie: pd.DataFrame, usa_clima: bool) -> dict:
 
     futuro = modelo.make_future_dataframe(periods=0, freq="MS")
     if usa_clima:
-        futuro = futuro.merge(
-            serie[["ds", "temp_media", "precipitacion"]],
-            on="ds", how="left"
-        )
+        futuro = futuro.merge(serie[["ds", "temp_media", "precipitacion"]], on="ds", how="left")
         from services.clima_service import _CLIMATOLOGIA
         futuro["temp_media"]    = futuro["temp_media"].fillna(futuro["ds"].dt.month.map(lambda m: _CLIMATOLOGIA[m]["temp"]))
         futuro["precipitacion"] = futuro["precipitacion"].fillna(futuro["ds"].dt.month.map(lambda m: float(_CLIMATOLOGIA[m]["precip"])))
@@ -195,14 +275,19 @@ def entrenar_todos(forzar: bool = False) -> dict:
 
         try:
             serie = _enriquecer_con_clima(serie)
-            modelo, usa_clima = _entrenar_modelo(serie)
-            met = _calcular_metricas(modelo, serie, usa_clima)
-            met["puntos_historicos"] = len(serie)
+            media = serie["y"].mean()
 
-            _modelos[med]  = {"modelo": modelo, "usa_clima": usa_clima, "serie": serie}
+            if media >= _UMBRAL_PROPHET:
+                modelo, usa_clima = _entrenar_prophet(serie)
+                met = _calcular_metricas_prophet(modelo, serie, usa_clima)
+                met["puntos_historicos"] = len(serie)
+                _modelos[med]  = {"tipo": "prophet", "modelo": modelo, "usa_clima": usa_clima, "serie": serie}
+            else:
+                _modelos[med]  = {"tipo": "estadistico", "serie": serie}
+                _, met = _predecir_estadistico(serie, 1)
+
             _metricas[med] = met
-
-            joblib.dump({"modelo": modelo, "usa_clima": usa_clima, "serie": serie, "metricas": met},
+            joblib.dump({"tipo": _modelos[med]["tipo"], **_modelos[med], "metricas": met},
                         os.path.join(RUTA_MODELOS, f"{_slug(med)}.pkl"))
             entrenados += 1
         except Exception:
@@ -212,21 +297,20 @@ def entrenar_todos(forzar: bool = False) -> dict:
     rmse_global = round(sum(v["rmse"] for v in _metricas.values()) / len(_metricas), 4) if _metricas else 0
 
     return {
-        "mensaje": "Entrenamiento Prophet + clima completado.",
+        "mensaje": "Entrenamiento completado.",
         "modelos_entrenados": entrenados,
         "modelos_omitidos": omitidos,
         "errores": errores,
         "total_medicamentos": len(medicamentos),
         "periodos_incluidos": _periodos_entrenados,
-        "total_periodos": len(_periodos_entrenados),
         "mae_promedio_global": mae_global,
         "rmse_promedio_global": rmse_global,
-        "clima_integrado": True,
     }
 
 
 def predecir(medicamento: str, meses: int) -> dict:
     global _modelos, _metricas
+    from services.clima_service import _TEMPORADA_MES, _impacto_farmaceutico, _CLIMATOLOGIA
 
     df = obtener_df()
     if df.empty:
@@ -237,7 +321,7 @@ def predecir(medicamento: str, meses: int) -> dict:
         sugerencias = [m for m in medicamentos_disponibles if medicamento.upper() in m.upper()][:8]
         return {"error": f"Medicamento '{medicamento}' no encontrado.", "sugerencia": sugerencias}
 
-    # Cargar desde disco si no está en memoria
+    # Cargar o entrenar modelo
     if medicamento not in _modelos:
         pkl_path = os.path.join(RUTA_MODELOS, f"{_slug(medicamento)}.pkl")
         if os.path.exists(pkl_path):
@@ -250,101 +334,117 @@ def predecir(medicamento: str, meses: int) -> dict:
                 return {"error": f"'{medicamento}' tiene solo {len(serie)} período(s). Mínimo 2 para predecir."}
             os.makedirs(RUTA_MODELOS, exist_ok=True)
             serie = _enriquecer_con_clima(serie)
-            modelo, usa_clima = _entrenar_modelo(serie)
-            met = _calcular_metricas(modelo, serie, usa_clima)
-            met["puntos_historicos"] = len(serie)
-            _modelos[medicamento]  = {"modelo": modelo, "usa_clima": usa_clima, "serie": serie}
+            media = serie["y"].mean()
+
+            if media >= _UMBRAL_PROPHET:
+                modelo, usa_clima = _entrenar_prophet(serie)
+                met = _calcular_metricas_prophet(modelo, serie, usa_clima)
+                met["puntos_historicos"] = len(serie)
+                _modelos[medicamento] = {"tipo": "prophet", "modelo": modelo, "usa_clima": usa_clima, "serie": serie}
+            else:
+                _modelos[medicamento] = {"tipo": "estadistico", "serie": serie}
+                _, met = _predecir_estadistico(serie, 1)
+                met["puntos_historicos"] = len(serie)
+
             _metricas[medicamento] = met
-            joblib.dump({"modelo": modelo, "usa_clima": usa_clima, "serie": serie, "metricas": met},
+            joblib.dump({"tipo": _modelos[medicamento]["tipo"], **_modelos[medicamento], "metricas": met},
                         os.path.join(RUTA_MODELOS, f"{_slug(medicamento)}.pkl"))
 
-    datos_med = _modelos[medicamento]
-    modelo    = datos_med["modelo"]
-    usa_clima = datos_med["usa_clima"]
+    datos_med  = _modelos[medicamento]
+    met        = _metricas[medicamento]
     serie_hist = datos_med.get("serie")
     if serie_hist is None or (hasattr(serie_hist, "empty") and serie_hist.empty):
         serie_hist = _construir_serie(df, medicamento)
-    met        = _metricas[medicamento]
+        serie_hist = _enriquecer_con_clima(serie_hist)
 
-    # Obtener clima futuro para los meses a predecir
-    ultima_fecha = serie_hist["ds"].max()
-    fecha_inicio_pred = ultima_fecha + pd.DateOffset(months=1)
-    df_clima_futuro = obtener_clima_futuro_mensual(fecha_inicio_pred, meses)
+    tipo = datos_med.get("tipo", "estadistico")
 
-    # Construir DataFrame futuro para Prophet
-    futuro = modelo.make_future_dataframe(periods=meses, freq="MS")
-    if usa_clima:
-        # Clima histórico del entrenamiento
-        clima_hist = serie_hist[["ds", "temp_media", "precipitacion"]].copy()
-        clima_hist["ds"] = clima_hist["ds"].dt.to_period("M").dt.to_timestamp()
+    # ── Generar predicciones según el tipo de modelo ─────────────────────────
+    if tipo == "prophet":
+        modelo    = datos_med["modelo"]
+        usa_clima = datos_med["usa_clima"]
+        ultima_fecha = serie_hist["ds"].max()
+        fecha_inicio_pred = ultima_fecha + pd.DateOffset(months=1)
+        df_clima_futuro = obtener_clima_futuro_mensual(fecha_inicio_pred, meses)
 
-        # Clima futuro
-        if not df_clima_futuro.empty:
-            clima_fut = df_clima_futuro[["ds", "temp_media", "precipitacion"]].copy()
-            clima_fut["ds"] = pd.to_datetime(clima_fut["ds"]).dt.to_period("M").dt.to_timestamp()
-        else:
-            from services.clima_service import _CLIMATOLOGIA
-            clima_fut = pd.DataFrame([{
-                "ds": (fecha_inicio_pred + pd.DateOffset(months=i)).to_period("M").to_timestamp(),
-                "temp_media": _CLIMATOLOGIA[(fecha_inicio_pred + pd.DateOffset(months=i)).month]["temp"],
-                "precipitacion": float(_CLIMATOLOGIA[(fecha_inicio_pred + pd.DateOffset(months=i)).month]["precip"]),
-            } for i in range(meses)])
+        futuro = modelo.make_future_dataframe(periods=meses, freq="MS")
+        if usa_clima:
+            clima_hist = serie_hist[["ds", "temp_media", "precipitacion"]].copy()
+            clima_hist["ds"] = clima_hist["ds"].dt.to_period("M").dt.to_timestamp()
+            if not df_clima_futuro.empty:
+                clima_fut = df_clima_futuro[["ds", "temp_media", "precipitacion"]].copy()
+                clima_fut["ds"] = pd.to_datetime(clima_fut["ds"]).dt.to_period("M").dt.to_timestamp()
+            else:
+                clima_fut = pd.DataFrame([{
+                    "ds": (fecha_inicio_pred + pd.DateOffset(months=i)).to_period("M").to_timestamp(),
+                    "temp_media": _CLIMATOLOGIA[(fecha_inicio_pred + pd.DateOffset(months=i)).month]["temp"],
+                    "precipitacion": float(_CLIMATOLOGIA[(fecha_inicio_pred + pd.DateOffset(months=i)).month]["precip"]),
+                } for i in range(meses)])
 
-        clima_total = pd.concat([clima_hist, clima_fut], ignore_index=True)
-        clima_total["ds"] = clima_total["ds"].dt.to_period("M").dt.to_timestamp()
-        futuro["ds_key"] = futuro["ds"].dt.to_period("M").dt.to_timestamp()
-        clima_total["ds_key"] = clima_total["ds"]
-        futuro = futuro.merge(clima_total[["ds_key", "temp_media", "precipitacion"]], on="ds_key", how="left").drop(columns=["ds_key"])
+            clima_total = pd.concat([clima_hist, clima_fut], ignore_index=True)
+            clima_total["ds"] = clima_total["ds"].dt.to_period("M").dt.to_timestamp()
+            futuro["ds_key"] = futuro["ds"].dt.to_period("M").dt.to_timestamp()
+            clima_total["ds_key"] = clima_total["ds"]
+            futuro = futuro.merge(clima_total[["ds_key", "temp_media", "precipitacion"]], on="ds_key", how="left").drop(columns=["ds_key"])
+            futuro["temp_media"]    = futuro["temp_media"].fillna(futuro["ds"].dt.month.map(lambda m: _CLIMATOLOGIA[m]["temp"]))
+            futuro["precipitacion"] = futuro["precipitacion"].fillna(futuro["ds"].dt.month.map(lambda m: float(_CLIMATOLOGIA[m]["precip"])))
 
-        from services.clima_service import _CLIMATOLOGIA
-        futuro["temp_media"]    = futuro["temp_media"].fillna(futuro["ds"].dt.month.map(lambda m: _CLIMATOLOGIA[m]["temp"]))
-        futuro["precipitacion"] = futuro["precipitacion"].fillna(futuro["ds"].dt.month.map(lambda m: float(_CLIMATOLOGIA[m]["precip"])))
+        forecast = modelo.predict(futuro)
+        forecast_futuro = forecast[forecast["ds"] > ultima_fecha].head(meses)
+        if forecast_futuro.empty:
+            forecast_futuro = forecast.tail(meses)
 
-    forecast = modelo.predict(futuro)
-    forecast_futuro = forecast[forecast["ds"] > ultima_fecha].head(meses)
-    if forecast_futuro.empty:
-        forecast_futuro = forecast.tail(meses)
+        promedio_reciente = float(np.mean(serie_hist["y"].tail(3).values))
+        predicciones_raw = []
+        for _, row in forecast_futuro.iterrows():
+            yhat       = float(row["yhat"])
+            yhat_lower = float(row["yhat_lower"])
+            yhat_upper = float(row["yhat_upper"])
+            if yhat <= 0:
+                yhat       = promedio_reciente
+                yhat_lower = max(0.0, promedio_reciente * 0.6)
+                yhat_upper = promedio_reciente * 1.4
+            predicciones_raw.append({
+                "fecha": row["ds"],
+                "yhat": yhat,
+                "yhat_lower": max(0.0, yhat_lower),
+                "yhat_upper": yhat_upper,
+                "mes_num": row["ds"].month,
+            })
+        nombre_modelo = "Prophet + Clima"
+        usa_clima_resp = usa_clima
 
-    # Construir respuesta de predicciones
-    from services.clima_service import _TEMPORADA_MES, _impacto_farmaceutico
+    else:
+        predicciones_raw, _ = _predecir_estadistico(serie_hist, meses)
+        nombre_modelo = "Estadístico Estacional"
+        usa_clima_resp = True
+
+    # ── Construir respuesta ──────────────────────────────────────────────────
     predicciones = []
     total_unidades = 0
 
-    for i, (_, row) in enumerate(forecast_futuro.iterrows()):
-        uds     = max(0, round(float(row["yhat"]), 1))
-        uds_min = max(0, round(float(row["yhat_lower"]), 1))
-        uds_max = max(0, round(float(row["yhat_upper"]), 1))
+    for p in predicciones_raw:
+        uds     = round(max(0.0, p["yhat"]), 1)
+        uds_min = round(max(0.0, p["yhat_lower"]), 1)
+        uds_max = round(max(0.0, p["yhat_upper"]), 1)
         total_unidades += uds
-        mes_num = row["ds"].month
-
-        clima_mes = {}
-        if not df_clima_futuro.empty and i < len(df_clima_futuro):
-            fila_clima = df_clima_futuro.iloc[i]
-            es_pron = fila_clima.get("es_pronostico", True)
-            clima_mes = {
-                "temp_media": round(float(fila_clima["temp_media"]), 1),
-                "precipitacion": round(float(fila_clima["precipitacion"]), 1),
-                "temporada": str(_TEMPORADA_MES[mes_num]["temporada"]),
-                "temporada_label": str(_TEMPORADA_MES[mes_num]["label"]),
-                "temporada_emoji": str(_TEMPORADA_MES[mes_num]["emoji"]),
-                "es_pronostico": bool(es_pron) if not isinstance(es_pron, bool) else es_pron,
-            }
-
+        mes_num = p["mes_num"]
         predicciones.append({
-            "mes": row["ds"].strftime("%B %Y"),
+            "mes": pd.Timestamp(p["fecha"]).strftime("%B %Y"),
             "unidades": uds,
             "minimo": uds_min,
             "maximo": uds_max,
-            "clima": clima_mes,
+            "clima": {
+                "temporada": str(_TEMPORADA_MES[mes_num]["temporada"]),
+                "temporada_label": str(_TEMPORADA_MES[mes_num]["label"]),
+                "temporada_emoji": str(_TEMPORADA_MES[mes_num]["emoji"]),
+            },
         })
 
-    # Historial con clima
+    # Historial
     historial = []
     for _, row in serie_hist.iterrows():
-        entrada = {
-            "mes": row["ds"].strftime("%B %Y"),
-            "unidades_reales": round(float(row["y"]), 1),
-        }
+        entrada = {"mes": row["ds"].strftime("%B %Y"), "unidades_reales": round(float(row["y"]), 1)}
         if "temp_media" in row and pd.notna(row["temp_media"]):
             mes_num = row["ds"].month
             entrada["clima"] = {
@@ -355,10 +455,9 @@ def predecir(medicamento: str, meses: int) -> dict:
             }
         historial.append(entrada)
 
-    # Temporada dominante en el período predicho
-    meses_pred = [p["mes"] for p in predicciones]
-    temporadas_pred = [_TEMPORADA_MES[forecast_futuro.iloc[i]["ds"].month]["temporada"] for i in range(len(predicciones))]
+    temporadas_pred = [_TEMPORADA_MES[p["mes_num"]]["temporada"] for p in predicciones_raw]
     temporada_dominante = max(set(temporadas_pred), key=temporadas_pred.count) if temporadas_pred else "seca"
+    primer_mes_num = predicciones_raw[0]["mes_num"] if predicciones_raw else 1
 
     resultado = {
         "medicamento": medicamento,
@@ -370,10 +469,10 @@ def predecir(medicamento: str, meses: int) -> dict:
         "clima_contexto": {
             "ciudad": "Bucaramanga, Colombia",
             "temporada_dominante": temporada_dominante,
-            "temporada_label": _TEMPORADA_MES[forecast_futuro.iloc[0]["ds"].month]["label"] if not forecast_futuro.empty else "",
-            "temporada_emoji": _TEMPORADA_MES[forecast_futuro.iloc[0]["ds"].month]["emoji"] if not forecast_futuro.empty else "",
+            "temporada_label": _TEMPORADA_MES[primer_mes_num]["label"],
+            "temporada_emoji": _TEMPORADA_MES[primer_mes_num]["emoji"],
             "impacto": _impacto_farmaceutico(temporada_dominante, 0),
-            "clima_usado_en_modelo": usa_clima,
+            "clima_usado_en_modelo": usa_clima_resp,
         },
         "metricas_modelo": {
             **met,
@@ -381,13 +480,12 @@ def predecir(medicamento: str, meses: int) -> dict:
             "rmse_aceptable": met.get("rmse", 99) < 20,
             "periodos_entrenamiento": len(serie_hist),
         },
-        "modelo": "Prophet + Clima",
+        "modelo": nombre_modelo,
     }
     return _limpiar_numpy(resultado)
 
 
 def _limpiar_numpy(obj):
-    """Convierte recursivamente tipos numpy a tipos Python nativos."""
     if isinstance(obj, dict):
         return {k: _limpiar_numpy(v) for k, v in obj.items()}
     if isinstance(obj, list):

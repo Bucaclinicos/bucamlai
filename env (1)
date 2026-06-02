@@ -1,0 +1,8 @@
+DATABASE_URL=postgresql://uhnpvb967vm8hfkyusel:tbnVZ2nQy9ckQlsq9cSp77CyrusfP1@bggcet5vjhu9dr3atfou-postgresql.services.clever-cloud.com:50013/bggcet5vjhu9dr3atfou?sslmode=require
+SECRET_KEY=bucamlai-secret-key-change-in-production-2026
+MAIL_USERNAME=tu_correo@gmail.com
+MAIL_PASSWORD=tu_app_password_de_gmail
+MAIL_FROM=tu_correo@gmail.com
+MAIL_PORT=587
+MAIL_SERVER=smtp.gmail.com
+FRONTEND_URL=http://localhost:5173
